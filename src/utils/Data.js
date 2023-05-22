@@ -51,6 +51,7 @@ export const transport = [
   "Perahu Penyebrangan/Rakit/Getek",
   "Lainya",
 ];
+
 export const reasonKip = [
   "Daerah Konflik",
   "Dampak Bencana Alam",

@@ -18,6 +18,9 @@ import {
   typeAchievements,
   levelAchievements,
   year,
+  receiver,
+  reasonKip,
+  typeRegistration,
 } from "../../utils/data";
 
 // Interface
@@ -25,6 +28,7 @@ import {
   formPPDBAdminInterface,
   scholarshipInterface,
   achievementInterface,
+  imagesUploadPPDBInterface,
 } from "../../interfaces";
 
 // Layout
@@ -37,15 +41,21 @@ import InputSelect from "../../components/forms/InputSelect";
 import FormTitle from "../../components/forms/FormTitle";
 import Button from "../../components/Button";
 import TextArea from "../../components/forms/TextArea";
+import InputFile from "../../components/forms/InputFile";
 
 const Add_PPDB = () => {
+  const [currentTab, setCurrentTab] = useState(1);
   const [formData, setFormData] = useState({
     ...formPPDBAdminInterface,
   });
-  const [currentTab, setCurrentTab] = useState(1);
-  const [achievements, setAchievements] = useState([]);
+  const [achievements, setAchievements] = useState([
+    { ...achievementInterface },
+  ]);
   const [scholarships, setScholarships] = useState([
     { ...scholarshipInterface },
+  ]);
+  const [imageUploads, setImageUploads] = useState([
+    { ...imagesUploadPPDBInterface },
   ]);
 
   const handleSubmit = (e: any) => {
@@ -81,13 +91,31 @@ const Add_PPDB = () => {
 
             <Form_4
               isActive={currentTab == 4}
-              formData={formData}
-              setFormData={setFormData}
               scholarships={scholarships}
               setScholarships={setScholarships}
             />
 
-            <button className="flex w-full justify-center rounded bg-primary p-3 font-medium text-gray">
+            <Form_5
+              isActive={currentTab == 5}
+              formData={formData}
+              setFormData={setFormData}
+              achievements={achievements}
+              setAchievement={setAchievements}
+            />
+
+            <Form_6
+              isActive={currentTab == 6}
+              formData={formData}
+              setFormData={setFormData}
+            />
+
+            <Form_7
+              isActive={currentTab == 7}
+              imageUploads={imageUploads}
+              setImageUploads={setImageUploads}
+            />
+
+            <button className="flex w-full justify-center rounded bg-primary p-3 font-medium text-gray mt-12">
               Send Message
             </button>
           </form>
@@ -156,6 +184,14 @@ const TabsForm = ({ currentTab, setCurrentTab }) => {
       >
         Berkas
       </Button>
+      <Button
+        type="button"
+        bg="bg-meta-4"
+        onClick={() => setCurrentTab(8)}
+        active={currentTab == 8 ?? false}
+      >
+        Optinal
+      </Button>
     </div>
   );
 };
@@ -163,7 +199,7 @@ const TabsForm = ({ currentTab, setCurrentTab }) => {
 const Form_1 = ({ isActive, formData, setFormData }) => {
   return (
     <div className={`${isActive ? "block" : "hidden"}`}>
-      <div className="mb-4.5 grid grid-cols-3 gap-6">
+      <div className="mb-4.5 grid lg:grid-cols-3 sm:grid-cols-2  gap-6">
         <Input
           type="text"
           label="Nama Lengkap"
@@ -237,7 +273,7 @@ const Form_1 = ({ isActive, formData, setFormData }) => {
 const Form_2 = ({ isActive, formData, setFormData }) => {
   return (
     <div className={`${isActive ? "block" : "hidden"}`}>
-      <div className="mb-4.5 grid grid-cols-3 gap-6">
+      <div className="mb-4.5  grid lg:grid-cols-3 sm:grid-cols-2 gap-6">
         <Input
           type="text"
           label="NISN"
@@ -381,7 +417,7 @@ const Form_3 = ({ isActive, formData, setFormData }) => {
       {/* ============= Data Ayah Kandung ============= */}
 
       <FormTitle title="Data Ayah Kandung" />
-      <div className="grid grid-cols-3 gap-6 mb-12">
+      <div className=" grid lg:grid-cols-3 sm:grid-cols-2 gap-6 mb-12">
         <Input
           type="text"
           label="Nama Ayah Kandung"
@@ -446,7 +482,7 @@ const Form_3 = ({ isActive, formData, setFormData }) => {
       {/* ============= Data Ayah Kandung ============= */}
 
       <FormTitle title="Data Ibu Kandung" />
-      <div className="mb-4.5 grid grid-cols-3 gap-6">
+      <div className="mb-4.5  grid lg:grid-cols-3 sm:grid-cols-2 gap-6">
         <Input
           type="text"
           label="Nama Ibu Kandung"
@@ -511,13 +547,7 @@ const Form_3 = ({ isActive, formData, setFormData }) => {
   );
 };
 
-const Form_4 = ({
-  isActive,
-  formData,
-  setFormData,
-  scholarships,
-  setScholarships,
-}) => {
+const Form_4 = ({ isActive, scholarships, setScholarships }) => {
   function onAddScholarship() {
     const field = { ...scholarshipInterface };
     setScholarships([...scholarships, field]);
@@ -536,7 +566,7 @@ const Form_4 = ({
 
       {scholarships.map((item, i) => (
         <>
-          <div className="grid grid-cols-2 gap-6 mb-8" key={i}>
+          <div className="grid md:grid-cols-2 gap-6 mb-8" key={i}>
             <Input
               formDataType="array"
               position={i}
@@ -544,7 +574,8 @@ const Form_4 = ({
               label="Jenis Beasiswa"
               placeholder="..."
               field="type_scholarship"
-              formData={scholarships}
+              data={scholarships}
+              formData={item}
               setFormData={setScholarships}
             />
             <InputSelect
@@ -555,7 +586,8 @@ const Form_4 = ({
               field="year_start_at_scholarship"
               formData={scholarships}
               setFormData={setScholarships}
-              options={profession}
+              data={scholarships}
+              options={year}
             />
             <InputSelect
               formDataType="array"
@@ -565,7 +597,8 @@ const Form_4 = ({
               field="year_finish_at_scholarship"
               formData={scholarships}
               setFormData={setScholarships}
-              options={profession}
+              data={scholarships}
+              options={year}
             />
             <TextArea
               formDataType="array"
@@ -574,26 +607,273 @@ const Form_4 = ({
               placeholder="..."
               field="descriptions_scholarship"
               formData={scholarships}
+              data={scholarships}
               setFormData={setScholarships}
             />
           </div>
-          <div className="flex items-center justify-end gap-3 mb-12">
-            <Button
-              type="button"
-              bg="bg-meta-1"
-              onClick={() => onDeleteScholarship(i)}
-            >
-              <AiOutlineDelete className="text-[1.3em]" />
-              Hapus
-            </Button>
-            <Button type="button" bg="bg-meta-3" onClick={onAddScholarship}>
-              <IoIosAddCircleOutline className="text-[1.4em]" />
-              Tambah
-            </Button>
-          </div>
+          {scholarships.length > 1 && (
+            <div className="flex items-center justify-end gap-3 mb-12">
+              <Button
+                type="button"
+                bg="bg-meta-1"
+                onClick={() => onDeleteScholarship(i)}
+              >
+                <AiOutlineDelete className="text-[1.3em]" />
+                Hapus
+              </Button>
+              {scholarships.length > 0}
+            </div>
+          )}
         </>
       ))}
+
+      <div className="mb-8 flex justify-end">
+        <Button type="button" bg="bg-meta-3" onClick={onAddScholarship}>
+          <IoIosAddCircleOutline className="text-[1.4em]" />
+          Tambah
+        </Button>
+      </div>
       {/* ============= Data Ayah Kandung ============= */}
+    </div>
+  );
+};
+
+const Form_5 = ({
+  isActive,
+  formData,
+  setFormData,
+  achievements,
+  setAchievement,
+}) => {
+  function onAddScholarship() {
+    const field = { ...achievementInterface };
+    setAchievement([...achievements, field]);
+  }
+
+  function onDeleteScholarship(i) {
+    const newAchievements = [...achievements];
+    newAchievements.splice(i, 1);
+
+    setAchievement(newAchievements);
+  }
+
+  return (
+    <div className={`${isActive ? "block" : "hidden"}`}>
+      {/* ============= Data Ayah Kandung ============= */}
+
+      {achievements.map((item, i) => (
+        <>
+          <div className="grid sm:grid-cols-2 gap-6 mb-8" key={i}>
+            <Input
+              formDataType="array"
+              position={i}
+              type="text"
+              label="Nama Prestasi"
+              placeholder="..."
+              field="name_achievement"
+              data={achievements}
+              formData={item}
+              setFormData={setAchievement}
+            />
+            <InputSelect
+              formDataType="array"
+              position={i}
+              label="Jenis Prestasi"
+              placeholder="..."
+              field="type_achievement"
+              formData={achievements}
+              setFormData={setAchievement}
+              data={achievements}
+              options={typeAchievements}
+            />
+            <InputSelect
+              formDataType="array"
+              position={i}
+              label="Tahun"
+              placeholder="..."
+              field="year_achievement"
+              formData={achievements}
+              setFormData={setAchievement}
+              data={achievements}
+              options={year}
+            />
+            <InputSelect
+              formDataType="array"
+              position={i}
+              label="Tingkat"
+              placeholder="..."
+              field="level_achievement"
+              formData={achievements}
+              setFormData={setAchievement}
+              data={achievements}
+              options={levelAchievements}
+            />
+            <Input
+              formDataType="array"
+              position={i}
+              type="text"
+              label="Penyelenggara"
+              placeholder="..."
+              field="organinizer_achievement"
+              data={achievements}
+              formData={item}
+              setFormData={setAchievement}
+            />
+          </div>
+          {achievements.length > 1 && (
+            <div className="flex items-center justify-end gap-3 mb-12">
+              <Button
+                type="button"
+                bg="bg-meta-1"
+                onClick={() => onDeleteScholarship(i)}
+              >
+                <AiOutlineDelete className="text-[1.3em]" />
+                Hapus
+              </Button>
+              {achievements.length > 0}
+            </div>
+          )}
+        </>
+      ))}
+
+      <div className="mb-8 flex justify-end">
+        <Button type="button" bg="bg-meta-3" onClick={onAddScholarship}>
+          <IoIosAddCircleOutline className="text-[1.4em]" />
+          Tambah
+        </Button>
+      </div>
+      {/* ============= Data Ayah Kandung ============= */}
+    </div>
+  );
+};
+
+const Form_6 = ({ isActive, formData, setFormData }) => {
+  return (
+    <div className={`${isActive ? "block" : "hidden"}`}>
+      <div className="mb-4.5 grid lg:grid-cols-3 sm:grid-cols-2 gap-6">
+        <InputSelect
+          label="Jenis Pendaftaran"
+          placeholder="..."
+          field="type_registration"
+          formData={formData}
+          setFormData={setFormData}
+          options={typeRegistration}
+        />
+        <Input
+          type="text"
+          label="No Peserta Ujian"
+          placeholder="..."
+          field="no_examinee"
+          formData={formData}
+          setFormData={setFormData}
+        />
+        <Input
+          type="text"
+          label="No. Seri Ijazah"
+          placeholder="..."
+          field="no_serial_diploma"
+          formData={formData}
+          setFormData={setFormData}
+        />
+        <Input
+          type="text"
+          label="No SKHUS"
+          placeholder="..."
+          field="no_serial_skhus"
+          formData={formData}
+          setFormData={setFormData}
+        />
+
+        <InputSelect
+          label="Ekstrakurikuler 1"
+          placeholder="..."
+          field="extra1"
+          formData={formData}
+          setFormData={setFormData}
+          options={extracurriculer}
+        />
+
+        <InputSelect
+          label="Ekstrakurikuler 2"
+          placeholder="..."
+          field="extra2"
+          formData={formData}
+          setFormData={setFormData}
+          options={extracurriculer}
+        />
+
+        <InputSelect
+          label="Baju Olahraga"
+          placeholder="..."
+          field="uniform1"
+          formData={formData}
+          setFormData={setFormData}
+          options={uniform}
+        />
+        <InputSelect
+          label="Baju Wear Pack (Khusus Jurusan TKJ)"
+          placeholder="..."
+          field="uniform2"
+          formData={formData}
+          setFormData={setFormData}
+          options={uniform}
+        />
+        <InputSelect
+          label="Baju Kotak-Kotak"
+          placeholder="..."
+          field="uniform3"
+          formData={formData}
+          setFormData={setFormData}
+          options={uniform}
+        />
+        <InputSelect
+          label="Jaz Almamater"
+          placeholder="..."
+          field="uniform3"
+          formData={formData}
+          setFormData={setFormData}
+          options={uniform}
+        />
+      </div>
+    </div>
+  );
+};
+
+const Form_7 = ({ isActive, imageUploads, setImageUploads }) => {
+  return (
+    <div className={`${isActive ? "block" : "hidden"}`}>
+      <div className="mb-4.5 grid lg:grid-cols-3 sm:grid-cols-2 gap-y-12 gap-x-6">
+        <InputFile
+          label="Foto Scan Nisn"
+          field="nisn_image"
+          imageUploads={imageUploads}
+          setImageUploads={setImageUploads}
+        />
+        <InputFile
+          label="Foto Scan Kartu Keluarga"
+          field="kartu_keluarga_image"
+          imageUploads={imageUploads}
+          setImageUploads={setImageUploads}
+        />
+        <InputFile
+          label="Foto Scan Kartu KIP (Optional)"
+          field="foto_kip"
+          imageUploads={imageUploads}
+          setImageUploads={setImageUploads}
+        />
+        <InputFile
+          label="Foto Scan Kartu KIP (Optional)"
+          field="foto_kks"
+          imageUploads={imageUploads}
+          setImageUploads={setImageUploads}
+        />
+        <InputFile
+          label="Foto Scan Kartu KPS (Optional)"
+          field="foto_kps"
+          imageUploads={imageUploads}
+          setImageUploads={setImageUploads}
+        />
+      </div>
     </div>
   );
 };

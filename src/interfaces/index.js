@@ -87,4 +87,16 @@ const achievementInterface = {
   organinizer_achievement: "",
 };
 
-export { formPPDBAdminInterface, scholarshipInterface, achievementInterface };
+const imagesUploadPPDBInterface = {
+  nisn_image: "",
+  kartu_keluarga_image: "",
+  foto_kip: "",
+  foto_kks: "",
+  foto_kps: "",
+};
+export {
+  formPPDBAdminInterface,
+  scholarshipInterface,
+  achievementInterface,
+  imagesUploadPPDBInterface,
+};

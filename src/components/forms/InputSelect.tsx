@@ -9,6 +9,7 @@ const InputSelect = ({
   formData,
   setFormData,
   options,
+  data,
 }) => {
   const className =
     "relative z-20 w-full appearance-none rounded border border-stroke bg-transparent py-3 px-12 outline-none transition focus:border-primary active:border-primary dark:border-form-strokedark dark:bg-form-input";
@@ -17,9 +18,11 @@ const InputSelect = ({
 
   function handleOnChange(e: any) {
     if (formDataType == "array") {
-      const data = [...formData];
-      data[position][field] = e.target.value;
-      setFormData(data);
+      const newData = [...data];
+      value = e.target.value;
+      newData[position][field] = e.target.value;
+      setFormData(newData);
+      console.log(position);
       return;
     }
 

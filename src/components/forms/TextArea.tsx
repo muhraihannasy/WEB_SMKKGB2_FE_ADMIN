@@ -8,14 +8,17 @@ const TextArea = ({
   position,
   formData,
   setFormData,
+  data,
 }) => {
   let value = formData[field];
 
   function handleOnChange(e: any) {
     if (formDataType == "array") {
-      const data = [...formData];
-      data[position][field] = e.target.value;
-      setFormData(data);
+      const newData = [...data];
+      value = e.target.value;
+      newData[position][field] = e.target.value;
+      setFormData(newData);
+      console.log(position);
       return;
     }
 

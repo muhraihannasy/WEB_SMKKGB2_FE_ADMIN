@@ -9,6 +9,7 @@ const Input = ({
   position,
   formData,
   setFormData,
+  data,
 }) => {
   const className =
     "w-full rounded-lg border-[1.5px] border-stroke bg-transparent px-5 py-3 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary";
@@ -16,10 +17,10 @@ const Input = ({
 
   function handleOnChange(e: any) {
     if (formDataType == "array") {
-      const data = [...formData];
+      const newData = [...data];
       value = e.target.value;
-      data[position][field] = e.target.value;
-      setFormData(data);
+      newData[position][field] = e.target.value;
+      setFormData(newData);
       console.log(position);
       return;
     }
