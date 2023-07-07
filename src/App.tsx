@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
-import { Route, Routes } from "react-router-dom";
+import {  Route, Routes } from "react-router-dom";
 
+
+// Pages
 import SignIn from "./pages/Authentication/SignIn";
 import SignUp from "./pages/Authentication/SignUp";
 import Calendar from "./pages/Calendar";
@@ -13,8 +15,13 @@ import Settings from "./pages/Settings";
 import Tables from "./pages/Tables";
 import Alerts from "./pages/UiElements/Alerts";
 import Buttons from "./pages/UiElements/Buttons";
-import PPDB from "./pages/PPDB/PPDB";
-import Add_PPDB from "./pages/PPDB/Add_PPDB";
+import ArticleList from "./pages/Article/ArticleList";
+import AddArticle from "./pages/Article/AddArticle";
+import Users from "./pages/User";
+import Company from "./pages/Company";
+import Information from "./pages/Information";
+import Outlet from "./pages/Outlet";
+import Chat from "./pages/Chat";
 
 function App() {
   const [loading, setLoading] = useState<boolean>(true);
@@ -35,13 +42,22 @@ function App() {
   return loading ? (
     <p className=" text-center text-danger">Failed to lead app</p>
   ) : (
-    <>
+  <>
       <Routes>
-        <Route path="/" element={<ECommerce />} />
+        <Route path="/dashboard" element={<ECommerce />} />
         <Route path="/calendar" element={<Calendar />} />
-        {/* PPDB */}
-        <Route path="/ppdb" element={<PPDB />} />
-        <Route path="/add-ppdb-admin" element={<Add_PPDB />} />
+
+        <Route path="/administrator/users" element={<Users />} />
+        <Route path="/administrator/companies" element={<Company />} />
+        <Route path="/administrator/outlets" element={<Outlet />} />
+        <Route path="/administrator/informations" element={<Information />} />
+        <Route path="/administrator/chats" element={<Chat />} />
+
+
+        {/* Artikel */}
+        <Route path="/artikel/list" element={<ArticleList />} />
+        <Route path="/artikel/add-article" element={<AddArticle />} />
+        <Route path="/artikel/kategori" element={<FormLayout />} />
 
         <Route path="/profile" element={<Profile />} />
         <Route path="/forms/form-elements" element={<FormElements />} />

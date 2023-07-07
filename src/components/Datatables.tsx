@@ -1,4 +1,4 @@
-import { useTable, usePagination } from 'react-table';
+import { useTable, usePagination } from "react-table";
 
 const Datatables = ({ columns, data }) => {
   const {
@@ -44,7 +44,7 @@ const Datatables = ({ columns, data }) => {
                       className="min-w-[120px] py-4 pl-4 font-medium text-black dark:text-white "
                       {...column.getHeaderProps()}
                     >
-                      {column.render('Header')}
+                      {column.render("Header")}
                     </th>
                   ))}
                 </tr>
@@ -62,7 +62,7 @@ const Datatables = ({ columns, data }) => {
                           className="border-b border-[#eee] py-5 pl-4 dark:border-strokedark "
                           {...cell.getCellProps()}
                         >
-                          {cell.render('Cell')}
+                          {cell.render("Cell")}
                         </td>
                       );
                     })}
@@ -71,23 +71,32 @@ const Datatables = ({ columns, data }) => {
               })}
             </tbody>
           </table>
-          <button onClick={() => previousPage()} disabled={!canPreviousPage}>
-            {'<'} Previous
-          </button>{' '}
           <span>
-            Page{' '}
+            Page{" "}
             <strong>
               {pageIndex + 1} of {pageCount}
-            </strong>{' '}
+            </strong>{" "}
           </span>
-          <button onClick={() => nextPage()} disabled={!canNextPage}>
-            Next {'>'}
-          </button>{' '}
           <select name="" id="" onChange={(e) => setPageSize(e.target.value)}>
             <option value="10">10</option>
             <option value="20">20</option>
             <option value="30">30</option>
           </select>
+          {canPreviousPage && (
+            <button
+              onClick={() => previousPage()}
+              className="bg-meta-2 px-6 py-2 rounded-md font-semibold text-lg "
+            >
+              Previous
+            </button>
+          )}
+          <button
+            onClick={() => nextPage()}
+            disabled={!canNextPage}
+            className="bg-meta-6 text-white px-6 py-2 rounded-md font-semibold text-lg "
+          >
+            Next
+          </button>{" "}
         </div>
       </div>
     </>

@@ -43,7 +43,7 @@ import Button from "../../components/Button";
 import TextArea from "../../components/forms/TextArea";
 import InputFile from "../../components/forms/InputFile";
 
-const Add_PPDB = () => {
+const Add_PPDB_Student = () => {
   const [currentTab, setCurrentTab] = useState(1);
   const [formData, setFormData] = useState({
     ...formPPDBAdminInterface,
@@ -949,4 +949,4 @@ const Form_8 = ({ isActive, formData, setFormData }) => {
   );
 };
 
-export default Add_PPDB;
+export default Add_PPDB_Student;
