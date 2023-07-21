@@ -1,9 +1,24 @@
- import { Link } from 'react-router-dom';
-import Breadcrumb from '../../components/Breadcrumb';
-import LogoDark from '../../images/logo/logo-dark.svg';
-import Logo from '../../images/logo/logo.svg';
+// Third Party
+import { useForm } from 'react-hook-form';
+import { Link } from 'react-router-dom';
+import { DevTool } from "@hookform/devtools";
+
+// Components
+import Input from '../../components/forms/input_text/Input';
+
+interface FormValue {
+  email: string;
+  password: string;
+}
 
 const SignIn = () => {
+  const form = useForm<FormValue>();
+  const {register, handleSubmit, control, formState: { errors }} = form;
+
+  function handleOnSubmit(formValue: FormValue) {
+      console.log(formValue);
+  }
+
   return (
           <div className="md:w-[35em] w-[30em] mx-auto border-stroke bg-meta-6 mt-[8em] dark:border-strokedark flex items-center justiy-center">
             <div className="w-full p-4 sm:p-12.5 xl:p-17.5 bg-white  mx-auto">
@@ -11,9 +26,10 @@ const SignIn = () => {
                 Sign In to Posbill Admin
               </h2>
 
-              <form>
+              <form onSubmit={handleSubmit(handleOnSubmit)}>
                 <div className="mb-4">
-                  <label className="mb-2.5 block font-medium text-black dark:text-white">
+                  <Input name='email' label='email' register={register} />
+                  <label>
                     Email
                   </label>
                   <div className="relative">
@@ -87,6 +103,7 @@ const SignIn = () => {
                 </div>
               </form>
             </div>
+            <DevTool control={control} /> {/* set up the dev tool */}
           </div>
   );
 };

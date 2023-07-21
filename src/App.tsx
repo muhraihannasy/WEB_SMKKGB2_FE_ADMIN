@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import {  Route, Routes } from "react-router-dom";
+import {  Route, Routes, useNavigate } from "react-router-dom";
 
 
 // Pages
@@ -22,9 +22,12 @@ import Company from "./pages/Company";
 import Information from "./pages/Information";
 import Outlet from "./pages/Outlet";
 import Chat from "./pages/Chat";
+import environment from "./environment";
 
 function App() {
   const [loading, setLoading] = useState<boolean>(true);
+  const navigate = useNavigate();
+
 
   const preloader = document.getElementById("preloader");
 
@@ -44,6 +47,8 @@ function App() {
   ) : (
   <>
       <Routes>
+      
+        <Route path="/" element={<NavigateFromBaseURl />} />
         <Route path="/dashboard" element={<ECommerce />} />
         <Route path="/calendar" element={<Calendar />} />
 
@@ -72,6 +77,18 @@ function App() {
       </Routes>
     </>
   );
+}
+
+function NavigateFromBaseURl () {
+  const navigate = useNavigate();
+  useEffect(() => {
+    const url = window.location.href;
+    if (url.includes(environment.siteUrl)) {
+      navigate("/dashboard");
+    }
+  }, []);
+
+  return null;
 }
 
 export default App;

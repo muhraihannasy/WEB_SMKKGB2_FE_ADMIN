@@ -36,7 +36,7 @@ import DefaultLayout from "../../layout/DefaultLayout";
 import FormLayout from "../../layout/FormLayout";
 
 // Component
-import Input from "../../components/forms/Input";
+import Input from "../../components/forms/input_text/Input";
 import InputSelect from "../../components/forms/InputSelect";
 import FormTitle from "../../components/forms/FormTitle";
 import Button from "../../components/Button";
