@@ -23,7 +23,7 @@ const Input: React.FC<InputProps> = ({
 }) => {
 
   return (
-    <div>
+    <div className="mb-4">
       <label htmlFor={name} className={className.label}>{label}</label>
       <input
             {...register(name)}
