@@ -1,8 +1,8 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect } from 'react';
 
 // Icon
-import { IoIosAddCircleOutline } from "react-icons/io";
-import { AiOutlineDelete } from "react-icons/ai";
+import { IoIosAddCircleOutline } from 'react-icons/io';
+import { AiOutlineDelete } from 'react-icons/ai';
 
 // Utils
 import {
@@ -21,7 +21,7 @@ import {
   receiver,
   reasonKip,
   typeRegistration,
-} from "../../utils/data";
+} from '../../utils/data';
 
 // Interface
 import {
@@ -29,19 +29,19 @@ import {
   scholarshipInterface,
   achievementInterface,
   imagesUploadPPDBInterface,
-} from "../../interfaces";
+} from '../../interfaces';
 
 // Layout
-import DefaultLayout from "../../layout/DefaultLayout";
-import FormLayout from "../../layout/FormLayout";
+import DefaultLayout from '../../layout/DefaultLayout';
+import FormLayout from '../../layout/FormLayout';
 
 // Component
-import Input from "../../components/forms/input_text/Input";
-import InputSelect from "../../components/forms/InputSelect";
-import FormTitle from "../../components/forms/FormTitle";
-import Button from "../../components/Button";
-import TextArea from "../../components/forms/TextArea";
-import InputFile from "../../components/forms/InputFile";
+import Input from '../../components/forms_items/Input';
+import InputSelect from '../../components/forms_items/InputSelect';
+import FormTitle from '../../components/forms_items/FormTitle';
+import Button from '../../components/Button';
+import TextArea from '../../components/forms_items/TextArea';
+import InputFile from '../../components/forms_items/InputFile';
 
 const Add_PPDB_Student = () => {
   const [currentTab, setCurrentTab] = useState(1);
@@ -62,7 +62,7 @@ const Add_PPDB_Student = () => {
     e.preventDefault();
   };
 
-  console.log("sc", scholarships);
+  console.log('sc', scholarships);
   //   console.log("fm", formData);
   return (
     <DefaultLayout>
@@ -204,7 +204,7 @@ const TabsForm = ({ currentTab, setCurrentTab }) => {
 
 const Form_1 = ({ isActive, formData, setFormData }) => {
   return (
-    <div className={`${isActive ? "block" : "hidden"}`}>
+    <div className={`${isActive ? 'block' : 'hidden'}`}>
       <div className="mb-4.5 grid lg:grid-cols-3 sm:grid-cols-2  gap-6">
         <Input
           type="text"
@@ -278,7 +278,7 @@ const Form_1 = ({ isActive, formData, setFormData }) => {
 
 const Form_2 = ({ isActive, formData, setFormData }) => {
   return (
-    <div className={`${isActive ? "block" : "hidden"}`}>
+    <div className={`${isActive ? 'block' : 'hidden'}`}>
       <div className="mb-4.5  grid lg:grid-cols-3 sm:grid-cols-2 gap-6">
         <Input
           type="text"
@@ -419,7 +419,7 @@ const Form_2 = ({ isActive, formData, setFormData }) => {
 
 const Form_3 = ({ isActive, formData, setFormData }) => {
   return (
-    <div className={`${isActive ? "block" : "hidden"}`}>
+    <div className={`${isActive ? 'block' : 'hidden'}`}>
       {/* ============= Data Ayah Kandung ============= */}
 
       <FormTitle title="Data Ayah Kandung" />
@@ -567,7 +567,7 @@ const Form_4 = ({ isActive, scholarships, setScholarships }) => {
   }
 
   return (
-    <div className={`${isActive ? "block" : "hidden"}`}>
+    <div className={`${isActive ? 'block' : 'hidden'}`}>
       {/* ============= Data Ayah Kandung ============= */}
 
       {scholarships.map((item, i) => (
@@ -664,7 +664,7 @@ const Form_5 = ({
   }
 
   return (
-    <div className={`${isActive ? "block" : "hidden"}`}>
+    <div className={`${isActive ? 'block' : 'hidden'}`}>
       {/* ============= Data Ayah Kandung ============= */}
 
       {achievements.map((item, i) => (
@@ -755,7 +755,7 @@ const Form_5 = ({
 
 const Form_6 = ({ isActive, formData, setFormData }) => {
   return (
-    <div className={`${isActive ? "block" : "hidden"}`}>
+    <div className={`${isActive ? 'block' : 'hidden'}`}>
       <div className="mb-4.5 grid lg:grid-cols-3 sm:grid-cols-2 gap-6">
         <InputSelect
           label="Jenis Pendaftaran"
@@ -847,7 +847,7 @@ const Form_6 = ({ isActive, formData, setFormData }) => {
 
 const Form_7 = ({ isActive, imageUploads, setImageUploads }) => {
   return (
-    <div className={`${isActive ? "block" : "hidden"}`}>
+    <div className={`${isActive ? 'block' : 'hidden'}`}>
       <div className="mb-4.5 grid lg:grid-cols-3 sm:grid-cols-2 gap-y-12 gap-x-6">
         <InputFile
           label="Foto Scan Nisn"
@@ -886,7 +886,7 @@ const Form_7 = ({ isActive, imageUploads, setImageUploads }) => {
 
 const Form_8 = ({ isActive, formData, setFormData }) => {
   return (
-    <div className={`${isActive ? "block" : "hidden"}`}>
+    <div className={`${isActive ? 'block' : 'hidden'}`}>
       <div className="mb-4.5 grid lg:grid-cols-3 sm:grid-cols-2  gap-6">
         <Input
           type="number"

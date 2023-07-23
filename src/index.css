@@ -6,6 +6,7 @@
 * {
   scrollbar-width: thin;
   scrollbar-color: var(--secondary) var(--primary);
+  font-family: 'Poppins', sans-serif;
 }
 
 /* Chrome, Edge, and Safari */
@@ -188,3 +189,5 @@ span.flatpickr-weekday,
 [x-cloak] {
   display: none !important;
 }
+
+/* Form */

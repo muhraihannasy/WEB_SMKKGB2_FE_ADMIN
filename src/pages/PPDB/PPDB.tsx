@@ -1,47 +1,47 @@
-import { useMemo } from "react";
+import { useMemo } from 'react';
 
 // Icon
-import { FiUserPlus } from "react-icons/fi";
-import { RiFileExcel2Fill } from "react-icons/ri";
+import { FiUserPlus } from 'react-icons/fi';
+import { RiFileExcel2Fill } from 'react-icons/ri';
 
 // data
-import Data from "../../../data.json";
+import Data from '../../../data.json';
 
 // Layout
-import DefaultLayout from "../../layout/DefaultLayout";
+import DefaultLayout from '../../layout/DefaultLayout';
 
 // Component
-import Breadcrumb from "../../components/Breadcrumb";
-import TableThree from "../../components/TableThree";
-import Datatables from "../../components/Datatables";
+import Breadcrumb from '../../components/Breadcrumb';
+import TableThree from '../../components/TableThree';
+import Datatables from '../../components/Datatables';
 
 // Images
-import CoverOne from "../images/cover/cover-01.png";
-import userSix from "../images/user/user-06.png";
-import Button from "../../components/Button";
+import CoverOne from '../images/cover/cover-01.png';
+import userSix from '../images/user/user-06.png';
+import Button from '../../components/Button';
 
 const PPDB = () => {
   const columns = useMemo(
     () => [
       {
-        Header: "Id",
-        accessor: "id",
+        Header: 'Id',
+        accessor: 'id',
       },
       {
-        Header: "Admin",
-        accessor: "admin",
+        Header: 'Admin',
+        accessor: 'admin',
       },
       {
-        Header: "Nama Lengkap",
-        accessor: "fullname",
+        Header: 'Nama Lengkap',
+        accessor: 'fullname',
       },
       {
-        Header: "Sekolah",
-        accessor: "school",
+        Header: 'Sekolah',
+        accessor: 'school',
       },
       {
-        Header: "Tipe Registrasi",
-        accessor: "type_registration",
+        Header: 'Tipe Registrasi',
+        accessor: 'type_registration',
         Cell: ({ row }) => (
           <p className="inline-flex rounded-full bg-success bg-opacity-10 px-3 py-1 text-sm font-medium text-success">
             Paid
@@ -49,8 +49,8 @@ const PPDB = () => {
         ),
       },
       {
-        Header: "Actions",
-        accessor: "actions",
+        Header: 'Actions',
+        accessor: 'actions',
         Cell: ({ row }) => (
           <div className="flex items-center gap-2">
             <button className="hover:text-primary">
@@ -122,7 +122,7 @@ const PPDB = () => {
         ),
       },
     ],
-    []
+    [],
   );
 
   const data = useMemo(() => Data, []);
@@ -135,7 +135,11 @@ const PPDB = () => {
           <RiFileExcel2Fill className="text-[1.2em]" />
           Export Excel
         </Button>
-        <Button type="link" href="/add-ppdb-admin" bg="bg-meta-4">
+        <Button
+          type="link"
+          href="/administrator/ppdb/tambah_perserta"
+          bg="bg-meta-4"
+        >
           <FiUserPlus className="text-[1.2em]" />
           Tambah Siswa
         </Button>

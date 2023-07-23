@@ -1,10 +1,14 @@
 // Third Party
 import { useForm } from 'react-hook-form';
 import { Link } from 'react-router-dom';
-import { DevTool } from "@hookform/devtools";
+import { DevTool } from '@hookform/devtools';
 
 // Components
-import Input from '../../components/forms/input_text/Input';
+import Input from '../../components/forms_items/Input';
+import Screen from '../../components/Auth/Screen';
+
+// Images
+import background from '../../images/background_abstract.jpg';
 
 interface FormValue {
   email: string;
@@ -13,35 +17,68 @@ interface FormValue {
 
 const SignIn = () => {
   const form = useForm<FormValue>();
-  const {register, handleSubmit, control, formState: { errors }} = form;
+  const {
+    register,
+    handleSubmit,
+    control,
+    formState: { errors },
+  } = form;
 
   function handleOnSubmit(formValue: FormValue) {
-      console.log(formValue);
+    console.log(formValue);
   }
 
   return (
-          <div className="md:w-[35em] w-[30em] mx-auto border-stroke bg-meta-6 mt-[8em] dark:border-strokedark flex items-center justiy-center">
-            <div className="w-full p-4 sm:p-12.5 xl:p-17.5 bg-white  mx-auto">
-              <h2 className="mb-9 text-2xl font-bold text-black dark:text-white sm:text-title-xl2">
-                Sign In to Posbill Admin
-              </h2>
-    
-              <form onSubmit={handleSubmit(handleOnSubmit)}>
-                  <Input name='email' label='Email' register={register} />      
-                  <Input type='password' name='password' label='Password' register={register} />
+    <div className="grid grid-cols-2 fixed top-0 left-0 w-full h-full bg-white">
+      <div className="flex items-center justify-center">
+        <div>
+          <h2 className="text-[2em] mb-10 font-semibold text-black">Sign In</h2>
 
-                <div className="mb-5">
-                  <input
-                    type="submit"
-                    value="Sign In"
-                    className="w-full cursor-pointer rounded-lg border border-primary bg-primary p-4 text-white transition hover:bg-opacity-90"
-                  />
-                </div>
-              </form>
+          <form onSubmit={handleSubmit(handleOnSubmit)} className="w-[27em]">
+            <Input
+              name="email"
+              label="Email"
+              placeholder="Masukan Email"
+              register={register}
+            />
+            <Input
+              type="password"
+              name="password"
+              label="Password"
+              placeholder="Masukan Password"
+              register={register}
+            />
+
+            <Link
+              to="/auth/signup"
+              className="text-primary font-medium block mb-4 text-right"
+            >
+              Lupa Password ?
+            </Link>
+
+            <div className="mb-5">
+              <input
+                type="submit"
+                value="Sign In"
+                className="w-full cursor-pointer rounded-lg border border-primary bg-primary p-4 text-white transition hover:bg-opacity-90"
+              />
+
+              <p className="text-center mt-6">
+                Belum Memiliki Akun ?{' '}
+                <Link to="/auth/signup" className="text-primary font-medium">
+                  Daftar Disini
+                </Link>
+              </p>
             </div>
-            <DevTool control={control} /> {/* set up the dev tool */}
-          </div>
+          </form>
+        </div>
+      </div>
+
+      <Screen />
+    </div>
   );
 };
+
+// <DevTool control={control} /> {/* set up the dev tool */}
 
 export default SignIn;
