@@ -19,6 +19,7 @@ import Datatables from '../../components/Datatables';
 import CoverOne from '../images/cover/cover-01.png';
 import userSix from '../images/user/user-06.png';
 import Button from '../../components/Button';
+import { useNavigate } from 'react-router-dom';
 
 const PPDB = () => {
   const columns = useMemo(
@@ -125,25 +126,31 @@ const PPDB = () => {
     [],
   );
 
+  const navigate = useNavigate();
+
+  // Navigate
+  const NavigateToAddSiswa = () =>
+    navigate('/administrator/ppdb/tambah_perserta');
+
+  const handleExportExcel = () => {};
+
   const data = useMemo(() => Data, []);
+
   return (
     <DefaultLayout>
       <Breadcrumb pageName="Peneriman Siswa Baru" />
 
       <div className="flex-column mb-4 flex items-end justify-end gap-4">
-        <Button type="link" href="/tambah_siswa" bg="bg-success">
+        <Button bg="secondary" size="sm" onClick={handleExportExcel}>
           <RiFileExcel2Fill className="text-[1.2em]" />
           Export Excel
         </Button>
-        <Button
-          type="link"
-          href="/administrator/ppdb/tambah_perserta"
-          bg="bg-meta-4"
-        >
+        <Button bg="tertiary" size="sm" onClick={NavigateToAddSiswa}>
           <FiUserPlus className="text-[1.2em]" />
           Tambah Siswa
         </Button>
       </div>
+
       <Datatables columns={columns} data={data} />
     </DefaultLayout>
   );

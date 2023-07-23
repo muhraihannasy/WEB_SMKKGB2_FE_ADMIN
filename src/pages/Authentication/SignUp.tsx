@@ -6,10 +6,11 @@ import { DevTool } from '@hookform/devtools';
 // Components
 import Input from '../../components/forms_items/Input';
 import Screen from '../../components/Auth/Screen';
+import Button from '../../components/Button';
+import InputSelect from '../../components/forms_items/InputSelect';
 
 // Images
 import background from '../../images/background_abstract.jpg';
-import InputSelect from '../../components/forms_items/InputSelect';
 
 interface FormValue {
   email: string;
@@ -89,14 +90,10 @@ const SignIn = () => {
               register={register}
             />
 
-            <div className="mb-5 mt-8">
-              <button
-                type="submit"
-                value="Sign Up"
-                className="w-full cursor-pointer rounded-lg border border-primary bg-primary p-4 text-white transition hover:bg-opacity-90"
-              >
+            <div className="mb-5 mt-4">
+              <Button type="submit" bg="primary" size="full">
                 Sign Up
-              </button>
+              </Button>
 
               <p className="text-center mt-6">
                 Sudah Memiliki Akun ?{' '}

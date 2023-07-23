@@ -1,5 +1,8 @@
 import { useState, useEffect } from 'react';
 
+// Libary
+import { useForm } from 'react-hook-form';
+
 // Icon
 import { IoIosAddCircleOutline } from 'react-icons/io';
 import { AiOutlineDelete } from 'react-icons/ai';
@@ -23,54 +26,43 @@ import {
   typeRegistration,
 } from '../../utils/Data';
 
-// Interface
-import {
-  formPPDBAdminInterface,
-  scholarshipInterface,
-  achievementInterface,
-  imagesUploadPPDBInterface,
-} from '../../interfaces';
+// Types
+import { FormValue } from '../../Types/Index';
 
 // Layout
 import DefaultLayout from '../../layout/DefaultLayout';
 import FormLayout from '../../layout/FormLayout';
 
 // Component
-import Input from '../../components/forms_items/Input';
-import InputSelect from '../../components/forms_items/InputSelect';
-import FormTitle from '../../components/forms_items/FormTitle';
+import Form1Admin from '../../components/PPDB/Form/Form1Admin';
+import Form2 from '../../components/PPDB/Form/Form2';
+import TabsForm from '../../components/PPDB/Form/TabForm';
 import Button from '../../components/Button';
-import TextArea from '../../components/forms_items/TextArea';
-import InputFile from '../../components/forms_items/InputFile';
 
 const Add_PPDB = () => {
   const [currentTab, setCurrentTab] = useState(1);
-  const [formData, setFormData] = useState({
-    ...formPPDBAdminInterface,
-  });
-  const [achievements, setAchievements] = useState([
-    { ...achievementInterface },
-  ]);
-  const [scholarships, setScholarships] = useState([
-    { ...scholarshipInterface },
-  ]);
-  const [imageUploads, setImageUploads] = useState([
-    { ...imagesUploadPPDBInterface },
-  ]);
+  const form = useForm<FormValue>();
+  const {
+    register,
+    handleSubmit,
+    control,
+    formState: { errors },
+  } = form;
 
-  const handleSubmit = (e: any) => {
-    e.preventDefault();
-  };
+  function handleOnSubmit(formValue: FormValue) {
+    console.log(formValue);
+  }
 
-  console.log('sc', scholarships);
-  //   console.log("fm", formData);
   return (
     <DefaultLayout>
       <FormLayout title="Formulir Pendaftaran Siswa Baru">
         <div className="p-6.5">
           <TabsForm currentTab={currentTab} setCurrentTab={setCurrentTab} />
 
-          <form onSubmit={handleSubmit}>
+          <form onSubmit={handleSubmit(handleOnSubmit)}>
+            {currentTab == 1 && <Form1Admin register={register} />}
+            {currentTab == 2 && <Form2 register={register} />}
+
             <button className="flex w-full justify-center rounded bg-primary p-3 font-medium text-gray mt-12">
               Submit
             </button>
@@ -78,77 +70,6 @@ const Add_PPDB = () => {
         </div>
       </FormLayout>
     </DefaultLayout>
-  );
-};
-
-const TabsForm = ({ currentTab, setCurrentTab }) => {
-  return (
-    <div className="overflow-x-auto whitespace-nowrap flex items-center gap-2 mb-8 pb-1">
-      <Button
-        type="button"
-        bg="bg-meta-4"
-        onClick={() => setCurrentTab(1)}
-        active={currentTab == 1 ?? false}
-      >
-        Akun Murid
-      </Button>
-      <Button
-        type="button"
-        bg="bg-meta-4"
-        onClick={() => setCurrentTab(2)}
-        active={currentTab == 2 ?? false}
-      >
-        Data Murid
-      </Button>
-      <Button
-        type="button"
-        bg="bg-meta-4"
-        onClick={() => setCurrentTab(3)}
-        active={currentTab == 3 ?? false}
-      >
-        Data Orang Tua/Wali
-      </Button>
-      <Button
-        type="button"
-        bg="bg-meta-4"
-        onClick={() => setCurrentTab(4)}
-        active={currentTab == 4 ?? false}
-      >
-        Beasiswa
-      </Button>
-      <Button
-        type="button"
-        bg="bg-meta-4"
-        onClick={() => setCurrentTab(5)}
-        active={currentTab == 5 ?? false}
-      >
-        Prestasi
-      </Button>
-      <Button
-        type="button"
-        bg="bg-meta-4"
-        onClick={() => setCurrentTab(6)}
-        active={currentTab == 6 ?? false}
-      >
-        Registrasi
-      </Button>
-      <Button
-        type="button"
-        bg="bg-meta-4"
-        onClick={() => setCurrentTab(7)}
-        active={currentTab == 7 ?? false}
-      >
-        Berkas
-      </Button>
-      <Button
-        type="button"
-        bg="bg-meta-4"
-        onClick={() => setCurrentTab(8)}
-        active={currentTab == 8 ?? false}
-      >
-        Optinal
-      </Button>
-    </div>
   );
 };
 

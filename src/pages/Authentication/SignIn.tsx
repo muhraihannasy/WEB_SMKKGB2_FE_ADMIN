@@ -6,6 +6,7 @@ import { DevTool } from '@hookform/devtools';
 // Components
 import Input from '../../components/forms_items/Input';
 import Screen from '../../components/Auth/Screen';
+import Button from '../../components/Button';
 
 // Images
 import background from '../../images/background_abstract.jpg';
@@ -35,41 +36,39 @@ const SignIn = () => {
           <h2 className="text-[2em] mb-10 font-semibold text-black">Sign In</h2>
 
           <form onSubmit={handleSubmit(handleOnSubmit)} className="w-[27em]">
-            <Input
-              name="email"
-              label="Email"
-              placeholder="Masukan Email"
-              register={register}
-            />
-            <Input
-              type="password"
-              name="password"
-              label="Password"
-              placeholder="Masukan Password"
-              register={register}
-            />
+            <div className="flex flex-col gap-4">
+              <Input
+                name="email"
+                label="Email"
+                placeholder="Masukan Email"
+                register={register}
+              />
+              <Input
+                type="password"
+                name="password"
+                label="Password"
+                placeholder="Masukan Password"
+                register={register}
+              />
+            </div>
 
             <Link
               to="/auth/signup"
-              className="text-primary font-medium block mb-4 text-right"
+              className="text-primary font-medium block my-4 text-right"
             >
               Lupa Password ?
             </Link>
 
-            <div className="mb-5">
-              <input
-                type="submit"
-                value="Sign In"
-                className="w-full cursor-pointer rounded-lg border border-primary bg-primary p-4 text-white transition hover:bg-opacity-90"
-              />
+            <Button bg="primary" size="full">
+              Sign In
+            </Button>
 
-              <p className="text-center mt-6">
-                Belum Memiliki Akun ?{' '}
-                <Link to="/auth/signup" className="text-primary font-medium">
-                  Daftar Disini
-                </Link>
-              </p>
-            </div>
+            <p className="text-center mt-6">
+              Belum Memiliki Akun ?{' '}
+              <Link to="/auth/signup" className="text-primary font-medium">
+                Daftar Disini
+              </Link>
+            </p>
           </form>
         </div>
       </div>

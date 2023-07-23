@@ -15,17 +15,18 @@ type ButtonBackgroundType = {
 
 // Interface
 interface ButtonProps {
+  children?: ReactNode;
+  type?: string;
+  active?: boolean;
   size: keyof ButtonSizeType;
   bg: keyof ButtonBackgroundType;
-  children: ReactNode;
-  active?: boolean;
   onClick?: () => void;
 }
 
 const ButtonSize: ButtonSizeType = {
-  sm: 'px-10 py-4',
-  md: 'px-8 px-10',
-  full: '',
+  sm: 'py-4 px-5 ',
+  md: 'py-4 px-10',
+  full: 'w-full py-4',
 };
 
 const ButtonBackground: ButtonBackgroundType = {
@@ -34,14 +35,20 @@ const ButtonBackground: ButtonBackgroundType = {
   tertiary: 'bg-black',
 };
 
-const Button: React.FC<ButtonProps> = ({ children, bg, size, onClick }) => {
+const Button: React.FC<ButtonProps> = ({
+  type = 'button',
+  children,
+  bg,
+  size,
+  onClick,
+}) => {
   const styles = `inline-flex items-center justify-center gap-2.5 rounded-md  text-center font-medium text-white hover:bg-opacity-90  
   ${ButtonSize[size]}
   ${ButtonBackground[bg]}
   `;
 
   return (
-    <button className={styles} onClick={onClick}>
+    <button type={type} className={styles} onClick={onClick}>
       {children}
     </button>
   );

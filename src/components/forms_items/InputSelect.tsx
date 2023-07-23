@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 
-type InputSelectProps = {
+interface InputSelectProps {
   placeholder: string;
   label: string;
   name: string;
   register: any;
   options?: any;
-};
+}
 
 const InputSelect: React.FC<InputSelectProps> = ({
   label,
