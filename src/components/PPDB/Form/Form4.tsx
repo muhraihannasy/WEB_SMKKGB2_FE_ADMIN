@@ -65,38 +65,39 @@ const Form4: React.FC<FormPPDB> = ({
   return (
     <>
       {fields.map((item, index) => (
-        <div key={item.id}>
-          <InputSelect
-            name={`scholarships[${index}].type_scholarship`}
-            label="Jenis Beasiswa"
-            placeholder="......"
-            control={control}
-            register={register}
-          />
-          <InputSelect
-            name={`scholarships[${index}].year_start`}
-            label="Tahun Mulai"
-            placeholder="......"
-            control={control}
-            register={register}
-          />
-          <InputSelect
-            name={`scholarships[${index}].year_finish`}
-            label="Tahun Selesai"
-            placeholder="......"
-            control={control}
-            register={register}
-          />
-          <TextArea
-            name={`scholarships[${index}].description`}
-            label="Keterangan"
-            placeholder="......"
-            control={control}
-            register={register}
-          />
-          <br />
+        <>
+          <div key={item.id} className={style.wrapperInput}>
+            <InputSelect
+              name={`scholarships[${index}].type_scholarship`}
+              label="Jenis Beasiswa"
+              placeholder="......"
+              control={control}
+              register={register}
+            />
+            <InputSelect
+              name={`scholarships[${index}].year_start`}
+              label="Tahun Mulai"
+              placeholder="......"
+              control={control}
+              register={register}
+            />
+            <InputSelect
+              name={`scholarships[${index}].year_finish`}
+              label="Tahun Selesai"
+              placeholder="......"
+              control={control}
+              register={register}
+            />
+            <TextArea
+              name={`scholarships[${index}].description`}
+              label="Keterangan"
+              placeholder="......"
+              control={control}
+              register={register}
+            />
+          </div>
           {fields.length > 1 && <RenderDeleteButton position={index} />}
-        </div>
+        </>
       ))}
 
       <Button bg="primary" size="sm" onClick={handleAddScholarship}>
