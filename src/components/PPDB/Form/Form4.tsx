@@ -50,6 +50,18 @@ const Form4: React.FC<FormPPDB> = ({
     append(scholarship);
   };
 
+  const RenderDeleteButton = (position: any) => {
+    return (
+      <>
+        <Button bg="danger" size="sm" onClick={() => remove(position)}>
+          Delete Beasiswa
+        </Button>
+        <br />
+        <br />
+      </>
+    );
+  };
+
   return (
     <>
       {fields.map((item, index) => (
@@ -83,11 +95,7 @@ const Form4: React.FC<FormPPDB> = ({
             register={register}
           />
           <br />
-          <Button bg="danger" size="sm" onClick={() => remove(index)}>
-            Delete Beasiswa
-          </Button>
-          <br />
-          <br />
+          {fields.length > 1 && <RenderDeleteButton position={index} />}
         </div>
       ))}
 
