@@ -2,6 +2,10 @@ import { useState, useEffect } from 'react';
 
 // Libary
 import { useForm } from 'react-hook-form';
+import { DevTool } from '@hookform/devtools';
+
+// Helper
+import { uuidv4 } from '../../utils/Helper';
 
 // Icon
 import { IoIosAddCircleOutline } from 'react-icons/io';
@@ -43,18 +47,25 @@ import Form4 from '../../components/PPDB/Form/Form4';
 
 const Add_PPDB = () => {
   const [currentTab, setCurrentTab] = useState(1);
-  const [scholarships, setScholarships] = useState([
-    {
-      type_scholarship: '',
-      year_start: '',
-      year_finish: '',
-      description: '',
+
+  const form = useForm<FormValue>({
+    defaultValues: {
+      scholarships: [
+        {
+          id: uuidv4(),
+          type_scholarship: '',
+          year_start: '',
+          year_finish: '',
+          description: '',
+        },
+      ],
     },
-  ]);
-  const form = useForm<FormValue>();
+  });
   const {
     register,
     handleSubmit,
+    setValue,
+    getValues,
     control,
     formState: { errors },
   } = form;
@@ -76,8 +87,9 @@ const Add_PPDB = () => {
             {currentTab == 4 && (
               <Form4
                 register={register}
-                scholarships={scholarships}
-                setScholarships={setScholarships}
+                getValue={getValues}
+                setValue={setValue}
+                control={control}
               />
             )}
 
@@ -87,6 +99,8 @@ const Add_PPDB = () => {
           </form>
         </div>
       </FormLayout>
+
+      <DevTool control={control} />
     </DefaultLayout>
   );
 };

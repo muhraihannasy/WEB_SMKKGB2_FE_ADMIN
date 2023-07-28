@@ -6,6 +6,7 @@ interface InputSelectProps {
   name: string;
   register: any;
   options?: any;
+  control?: any;
 }
 
 const InputSelect: React.FC<InputSelectProps> = ({
@@ -14,6 +15,7 @@ const InputSelect: React.FC<InputSelectProps> = ({
   options,
   register,
   name,
+  control,
 }) => {
   const className =
     'relative z-20 w-full rounded-lg appearance-none rounded border border-stroke bg-transparent py-4 px-4 outline-none transition focus:border-primary active:border-primary dark:border-form-strokedark dark:bg-form-input';
@@ -29,6 +31,7 @@ const InputSelect: React.FC<InputSelectProps> = ({
           placeholder={placeholder}
           className={className}
           {...register(name)}
+          control={control}
         >
           <option value="">Pilih...</option>
           {/* {options.map((item, i) => (

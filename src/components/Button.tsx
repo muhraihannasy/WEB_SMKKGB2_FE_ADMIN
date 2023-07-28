@@ -25,7 +25,7 @@ interface ButtonProps {
 }
 
 const ButtonSize: ButtonSizeType = {
-  sm: 'py-4 px-5 ',
+  sm: 'py-4 px-5',
   md: 'py-4 px-10',
   full: 'w-full py-4',
 };
