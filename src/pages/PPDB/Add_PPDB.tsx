@@ -39,9 +39,18 @@ import Form2 from '../../components/PPDB/Form/Form2';
 import TabsForm from '../../components/PPDB/Form/TabForm';
 import Button from '../../components/Button';
 import Form3 from '../../components/PPDB/Form/Form3';
+import Form4 from '../../components/PPDB/Form/Form4';
 
 const Add_PPDB = () => {
   const [currentTab, setCurrentTab] = useState(1);
+  const [scholarships, setScholarships] = useState([
+    {
+      type_scholarship: '',
+      year_start: '',
+      year_finish: '',
+      description: '',
+    },
+  ]);
   const form = useForm<FormValue>();
   const {
     register,
@@ -64,6 +73,13 @@ const Add_PPDB = () => {
             {currentTab == 1 && <Form1Admin register={register} />}
             {currentTab == 2 && <Form2 register={register} />}
             {currentTab == 3 && <Form3 register={register} />}
+            {currentTab == 4 && (
+              <Form4
+                register={register}
+                scholarships={scholarships}
+                setScholarships={setScholarships}
+              />
+            )}
 
             <button className="flex w-full justify-center rounded bg-primary p-3 font-medium text-gray mt-12">
               Submit

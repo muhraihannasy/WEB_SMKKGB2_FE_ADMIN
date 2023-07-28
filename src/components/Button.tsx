@@ -11,6 +11,7 @@ type ButtonBackgroundType = {
   primary: string;
   secondary: string;
   tertiary: string;
+  danger: string;
 };
 
 // Interface
@@ -33,6 +34,7 @@ const ButtonBackground: ButtonBackgroundType = {
   primary: 'bg-primary',
   secondary: 'bg-meta-3',
   tertiary: 'bg-black',
+  danger: 'bg-danger',
 };
 
 const Button: React.FC<ButtonProps> = ({
