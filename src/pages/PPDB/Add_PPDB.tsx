@@ -38,6 +38,7 @@ import Form1Admin from '../../components/PPDB/Form/Form1Admin';
 import Form2 from '../../components/PPDB/Form/Form2';
 import TabsForm from '../../components/PPDB/Form/TabForm';
 import Button from '../../components/Button';
+import Form3 from '../../components/PPDB/Form/Form3';
 
 const Add_PPDB = () => {
   const [currentTab, setCurrentTab] = useState(1);
@@ -62,6 +63,7 @@ const Add_PPDB = () => {
           <form onSubmit={handleSubmit(handleOnSubmit)}>
             {currentTab == 1 && <Form1Admin register={register} />}
             {currentTab == 2 && <Form2 register={register} />}
+            {currentTab == 3 && <Form3 register={register} />}
 
             <button className="flex w-full justify-center rounded bg-primary p-3 font-medium text-gray mt-12">
               Submit

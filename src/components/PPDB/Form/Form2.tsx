@@ -7,8 +7,12 @@ import InputDate from '../../forms_items/InputDate';
 import InputSelect from '../../forms_items/InputSelect';
 
 const Form2: React.FC<FormPPDB> = ({ register }) => {
+  const style = {
+    wrapperInput: 'grid lg:grid-cols-3 md:grid-cols-2 gap-4 mb-10',
+    wrapperInputRTRW: 'flex items-center gap-3',
+  };
   return (
-    <div className="grid grid-cols-3 gap-4">
+    <div className={style.wrapperInput}>
       <Input
         type="number"
         name="nisn"
@@ -68,35 +72,38 @@ const Form2: React.FC<FormPPDB> = ({ register }) => {
         placeholder="....."
         register={register}
       />
-      <InputSelect
-        name="competency_1"
-        label="Pillihan Kompetensi 1"
-        placeholder="......"
-        register={register}
-      />
-      <InputSelect
-        name="competency_2"
-        label="Pillihan Kompetensi 2"
-        placeholder="......"
-        register={register}
-      />
-      <InputSelect
-        name="competency_3"
-        label="Pillihan Kompetensi 3"
-        placeholder="......"
+      <div className={style.wrapperInputRTRW}>
+        <Input
+          type="number"
+          name="rt"
+          label="RT"
+          placeholder="....."
+          register={register}
+        />
+        <Input
+          type="number"
+          name="rw"
+          label="RW"
+          placeholder="....."
+          register={register}
+        />
+      </div>
+      <Input
+        name="kelurahan"
+        label="Kelurahan"
+        placeholder="....."
         register={register}
       />
       <Input
-        name="email"
-        label="Email"
-        placeholder="......"
+        name="kecamatan"
+        label="Kecamatan"
+        placeholder="....."
         register={register}
-      />
+      />{' '}
       <Input
-        type="password"
-        name="password"
-        label="Password"
-        placeholder="......"
+        name="kodepos"
+        label="kodepos"
+        placeholder="....."
         register={register}
       />
     </div>
