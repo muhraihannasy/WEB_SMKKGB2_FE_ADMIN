@@ -5,7 +5,7 @@ interface InputSelectProps {
   label: string;
   name: string;
   register: any;
-  options?: any;
+  options?: any[];
   control?: any;
 }
 
@@ -18,7 +18,7 @@ const InputSelect: React.FC<InputSelectProps> = ({
   control,
 }) => {
   const className =
-    'relative z-20 w-full rounded-lg appearance-none rounded border border-stroke bg-transparent py-4 px-4 outline-none transition focus:border-primary active:border-primary dark:border-form-strokedark dark:bg-form-input';
+    'relative z-20 w-full rounded-lg appearance-none rounded border border-stroke bg-transparent h-[2.8125em]  px-4 outline-none transition focus:border-primary active:border-primary dark:border-form-strokedark dark:bg-form-input';
 
   return (
     <div>
@@ -34,11 +34,11 @@ const InputSelect: React.FC<InputSelectProps> = ({
           control={control}
         >
           <option value="">Pilih...</option>
-          {/* {options.map((item, i) => (
+          {[1, 2, 3, 4].map((item, i) => (
             <option value={item} key={i}>
               {item}
             </option>
-          ))} */}
+          ))}
         </select>
         <span className="absolute top-1/2 right-4 z-10 -translate-y-1/2">
           <svg

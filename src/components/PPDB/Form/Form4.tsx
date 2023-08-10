@@ -12,7 +12,7 @@ import Button from '../../Button';
 import InputSelect from '../../forms_items/InputSelect';
 import TextArea from '../../forms_items/TextArea';
 import { useActionData } from 'react-router-dom';
-import { useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { Controller, useFieldArray } from 'react-hook-form';
 
 interface FormPPDB {
@@ -65,8 +65,8 @@ const Form4: React.FC<FormPPDB> = ({
   return (
     <>
       {fields.map((item, index) => (
-        <>
-          <div key={item.id} className={style.wrapperInput}>
+        <React.Fragment key={item.id}>
+          <div className={style.wrapperInput}>
             <InputSelect
               name={`scholarships[${index}].type_scholarship`}
               label="Jenis Beasiswa"
@@ -97,7 +97,7 @@ const Form4: React.FC<FormPPDB> = ({
             />
           </div>
           {fields.length > 1 && <RenderDeleteButton position={index} />}
-        </>
+        </React.Fragment>
       ))}
 
       <Button bg="primary" size="sm" onClick={handleAddScholarship}>
