@@ -22,7 +22,6 @@ const Input: React.FC<InputProps> = ({
   register,
   placeholder = '',
   required = false,
-  control,
 }) => {
   return (
     <div>
@@ -35,7 +34,6 @@ const Input: React.FC<InputProps> = ({
         placeholder={placeholder}
         required={required}
         className={className.input}
-        control={control}
       />
       {/* {errors && <span className="text-red-500">{errors[name]?.message}</span>} */}
     </div>

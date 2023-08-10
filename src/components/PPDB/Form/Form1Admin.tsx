@@ -7,7 +7,7 @@ import InputSelect from '../../forms_items/InputSelect';
 
 const Form1Admin: React.FC<FormPPDB> = ({ register }) => {
   return (
-    <div className="grid grid-cols-3 gap-4">
+    <div className="grid grid-cols-3 gap-[1.8em]">
       <Input
         name="fullname"
         label="Nama Lengkap"

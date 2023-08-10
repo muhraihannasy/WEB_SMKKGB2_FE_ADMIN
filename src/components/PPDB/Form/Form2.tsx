@@ -8,7 +8,7 @@ import InputSelect from '../../forms_items/InputSelect';
 
 const Form2: React.FC<FormPPDB> = ({ register }) => {
   const style = {
-    wrapperInput: 'grid lg:grid-cols-3 md:grid-cols-2 gap-4 mb-10',
+    wrapperInput: 'grid lg:grid-cols-3 md:grid-cols-2 gap-[1.8em] mb-10',
     wrapperInputRTRW: 'flex items-center gap-3',
   };
   return (

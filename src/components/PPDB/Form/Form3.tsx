@@ -9,7 +9,7 @@ import InputSelect from '../../forms_items/InputSelect';
 const Form3: React.FC<FormPPDB> = ({ register }) => {
   const style = {
     titleForm: 'font-semibold text-[1.5em] text-black mb-5 underline',
-    wrapperInput: 'grid lg:grid-cols-3 md:grid-cols-2 gap-4 mb-10',
+    wrapperInput: 'grid lg:grid-cols-3 md:grid-cols-2 gap-[1.8em] mb-10',
   };
 
   return (

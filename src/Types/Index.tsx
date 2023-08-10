@@ -30,11 +30,4 @@ interface TabFormPPDB {
   setCurrentTab: (val: number) => void;
 }
 
-interface FormValue {
-  email: string;
-  password: string;
-  scholarships: Scholarship[];
-  achievements: Achievement[];
-}
-
-export type { TabFormPPDB, FormPPDB, FormValue };
+export type { TabFormPPDB, FormPPDB };

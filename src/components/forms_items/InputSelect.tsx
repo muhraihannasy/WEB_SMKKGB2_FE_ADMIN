@@ -31,7 +31,6 @@ const InputSelect: React.FC<InputSelectProps> = ({
           placeholder={placeholder}
           className={className}
           {...register(name)}
-          control={control}
         >
           <option value="">Pilih...</option>
           {[1, 2, 3, 4].map((item, i) => (
