@@ -1,3 +1,5 @@
+import React, { memo } from 'react';
+
 // Type
 import { TabFormPPDB } from '../../Types/Index';
 
@@ -13,6 +15,8 @@ const TabsForm: React.FC<TabFormPPDB> = ({
   const handleClickTab = (id: number) => {
     setCurrentTab(id);
   };
+
+  console.log('tabform rerun');
 
   return (
     <div className="h-[4em] flex items-end mb-8 px-4 bg-[#F9F9F9] rounded-tl-[0.675em] rounded-tr-[0.675em] overflow-x-scroll pb-0.5">

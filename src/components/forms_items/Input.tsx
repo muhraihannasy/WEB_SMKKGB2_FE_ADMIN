@@ -1,12 +1,12 @@
+import { useFormContext } from 'react-hook-form';
+
 type InputProps = {
   name: string;
-  register: any;
   label: string;
   type?: string;
   placeholder?: string;
   required?: boolean;
   className?: string;
-  control?: any;
 };
 
 const className = {
@@ -19,10 +19,11 @@ const Input: React.FC<InputProps> = ({
   name,
   label,
   type = 'text',
-  register,
   placeholder = '',
   required = false,
 }) => {
+  const { register } = useFormContext();
+
   return (
     <div>
       <label htmlFor={name} className={className.label}>

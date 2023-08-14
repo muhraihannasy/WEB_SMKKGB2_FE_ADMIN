@@ -1,32 +1,22 @@
+import { useEffect } from 'react';
+import { useFieldArray, useFormContext } from 'react-hook-form';
+
+// Utils
+import { uuidv4 } from '../../../utils/Helper';
+import { typeAchievements, levelAchievements, year } from '../../../utils/Data';
+
 // Icon
 import { BsPlusCircleFill } from 'react-icons/bs';
 import { MdDelete } from 'react-icons/md';
 
-// Utils
-import { uuidv4 } from '../../../utils/Helper';
-
-// Type
-import Button from '../../Button';
-
 // Component
 import InputSelect from '../../forms_items/InputSelect';
-import React, { useEffect } from 'react';
-import { useFieldArray } from 'react-hook-form';
 import Input from '../../forms_items/Input';
+import Button from '../../Button';
 
-interface FormPPDB {
-  register: any;
-  getValue: any;
-  setValue: any;
-  control: any;
-}
+const Form5: React.FC = ({}) => {
+  const { control } = useFormContext();
 
-const Form5: React.FC<FormPPDB> = ({
-  register,
-  control,
-  getValue,
-  setValue,
-}) => {
   const { fields, append, remove } = useFieldArray({
     control,
     name: 'achievements',
@@ -47,7 +37,7 @@ const Form5: React.FC<FormPPDB> = ({
 
   const style = {
     titleForm: 'font-semibold text-[1.5em] text-black mb-5 underline',
-    wrapperInput: 'grid lg:grid-cols-3 md:grid-cols-2 gap-[1.8em] mb-10',
+    wrapperInput: 'grid lg:grid-cols-3 md:grid-cols-2 gap-4 mb-10',
   };
 
   return (
@@ -59,36 +49,29 @@ const Form5: React.FC<FormPPDB> = ({
               name={`achievements[${index}].name`}
               label="Nama Prestasi"
               placeholder="....."
-              register={register}
-              control={control}
             />
             <InputSelect
               name={`achievements[${index}].type`}
               label="Jenis Prestasi"
               placeholder="......"
-              register={register}
-              control={control}
+              options={typeAchievements}
             />
             <InputSelect
               name={`achievements[${index}].year`}
               label="Tahun Mulai"
               placeholder="......"
-              register={register}
-              control={control}
+              options={year}
             />
             <InputSelect
               name={`achievements[${index}].level`}
               label="Level"
               placeholder="......"
-              register={register}
-              control={control}
+              options={levelAchievements}
             />
             <Input
               name={`achievements[${index}].organizer`}
               label="Penyelenggara"
               placeholder="....."
-              register={register}
-              control={control}
             />
           </div>
 

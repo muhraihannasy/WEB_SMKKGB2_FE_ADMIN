@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Route, Routes, useNavigate } from 'react-router-dom';
+import { ToastContainer } from 'react-toastify';
 
 // Pages
 import SignIn from './pages/Authentication/SignIn';
@@ -26,6 +27,8 @@ import PPDB from './pages/PPDB/PPDB';
 import Add_PPDB_Student from './pages/PPDB/Add_PPDB_Student';
 import Add_PPDB from './pages/PPDB/Add_PPDB';
 
+import 'react-toastify/dist/ReactToastify.css';
+
 function App() {
   const [loading, setLoading] = useState<boolean>(true);
   const navigate = useNavigate();
@@ -47,6 +50,8 @@ function App() {
     <p className=" text-center text-danger">Failed to lead app</p>
   ) : (
     <>
+      <ToastContainer />
+
       <Routes>
         <Route path="/" element={<NavigateFromBaseURl />} />
         <Route path="/dashboard" element={<ECommerce />} />

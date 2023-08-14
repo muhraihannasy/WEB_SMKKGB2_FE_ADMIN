@@ -1,42 +1,19 @@
 import { useState, useEffect } from 'react';
 
 // Libary
-import { useForm } from 'react-hook-form';
+import { FormProvider, useForm } from 'react-hook-form';
 import { DevTool } from '@hookform/devtools';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
+import { toast } from 'react-toastify';
 
 // Helper
 import { uuidv4 } from '../../utils/Helper';
 
 // Icon
-import { IoIosAddCircleOutline } from 'react-icons/io';
-import { AiOutlineDelete } from 'react-icons/ai';
 import { BsFillSendFill } from 'react-icons/bs';
 import { MdNavigateNext } from 'react-icons/md';
 import { BiChevronLeft } from 'react-icons/bi';
-
-// Utils
-import {
-  competency,
-  religion,
-  uniform,
-  extracurriculer,
-  gender,
-  specialNeeds,
-  education,
-  income,
-  profession,
-  typeAchievements,
-  levelAchievements,
-  year,
-  receiver,
-  reasonKip,
-  typeRegistration,
-} from '../../utils/Data';
-
-// Types
-import { FormValue } from '../../Types/Index';
 
 // Layout
 import DefaultLayout from '../../layout/DefaultLayout';
@@ -54,10 +31,103 @@ import Form6 from '../../components/PPDB/Form/Form6';
 import Form7 from '../../components/PPDB/Form/Form7';
 import Form8 from '../../components/PPDB/Form/Form8';
 
+const tabs = [
+  {
+    id: 1,
+    name: 'Akun Murid',
+  },
+  {
+    id: 2,
+    name: 'Data Murid',
+  },
+  {
+    id: 3,
+    name: 'Data Orang Tua/Wali',
+  },
+  {
+    id: 4,
+    name: 'Beasiswa',
+  },
+  {
+    id: 5,
+    name: 'Prestasi',
+  },
+  {
+    id: 6,
+    name: 'Registrasi',
+  },
+  {
+    id: 7,
+    name: 'Berkas',
+  },
+  {
+    id: 8,
+    name: 'Optional',
+  },
+];
+
 const schema = yup
   .object({
-    firstName: yup.string().required(),
-    age: yup.number().positive().integer().required(),
+    fullname: yup.string().required(),
+    from_school: yup.string().required(),
+    phone: yup.string().required(),
+    type_registration: yup.string().required(),
+    weight: yup.string().required(),
+    height: yup.string().required(),
+    special_needs: yup.string().required(),
+    religion: yup.string().required(),
+    birth_place: yup.string().required(),
+    birth_date: yup.string().required(),
+    address: yup.string().required(),
+    rt: yup.string().required(),
+    rw: yup.string().required(),
+    kelurahan: yup.string().required(),
+    kecamatan: yup.string().required(),
+    kodepos: yup.string().required(),
+    nisn: yup.string().required(),
+    // nisn_image: yup.string().required(),
+    // kartu_keluarga_image: yup.string().required(),
+    no_serial_skhus: yup.string().required(),
+    no_serial_diploma: yup.string().required(),
+    no_examinee: yup.string().required(),
+    competency_pick_1: yup.string().required(),
+    competency_pick_2: yup.string().required(),
+    competency_pick_3: yup.string().required(),
+    extracurricular_1: yup.string().required(),
+    extracurricular_2: yup.string().required(),
+    uniform_1: yup.string().required(),
+    uniform_2: yup.string().required(),
+    uniform_3: yup.string().required(),
+    uniform_4: yup.string().required(),
+
+    // Optinal
+    no_kks: yup.string(),
+    image_kks: yup.string(),
+    receiver_kps: yup.string(),
+    no_kps: yup.string(),
+    image_kps: yup.string(),
+    receiver_kip: yup.string(),
+    name_kip: yup.string(),
+    reason_kip: yup.string(),
+    image_kip: yup.string(),
+
+    // Parent
+    father_name: yup.string().required(),
+    father_nik: yup.string().required(),
+    father_birth_place: yup.string().required(),
+    father_birth_date: yup.string().required(),
+    father_education: yup.string().required(),
+    father_job: yup.string().required(),
+    father_income: yup.string().required(),
+
+    mother_name: yup.string().required(),
+    mother_nik: yup.string().required(),
+    mother_birth_place: yup.string().required(),
+    mother_birth_date: yup.string().required(),
+    mother_education: yup.string().required(),
+    mother_job: yup.string().required(),
+    mother_income: yup.string().required(),
+
     scholarships: yup.array(
       yup.object({
         id: yup.string(),
@@ -87,6 +157,10 @@ const Add_PPDB = () => {
 
   const form = useForm<FormData>({
     defaultValues: {
+      image_kip: "",
+      image_kps: "",
+      image_kks: "",
+      
       scholarships: [
         {
           id: uuidv4(),
@@ -111,53 +185,41 @@ const Add_PPDB = () => {
   });
 
   const {
-    register,
     handleSubmit,
-    setValue,
-    getValues,
     control,
     formState: { errors },
   } = form;
 
-  const tabs = [
-    {
-      id: 1,
-      name: 'Akun Murid',
-    },
-    {
-      id: 2,
-      name: 'Data Murid',
-    },
-    {
-      id: 3,
-      name: 'Data Orang Tua/Wali',
-    },
-    {
-      id: 4,
-      name: 'Beasiswa',
-    },
-    {
-      id: 5,
-      name: 'Prestasi',
-    },
-    {
-      id: 6,
-      name: 'Registrasi',
-    },
-    {
-      id: 7,
-      name: 'Berkas',
-    },
-    {
-      id: 8,
-      name: 'Optional',
-    },
-  ];
+  function handleOnSubmit(formValue: any) {
+    const { address, kecamatan, kelurahan, rt, rw, kodepos } = formValue;
 
-  function handleOnSubmit(formValue: FormValue) {
-    console.log(formValue);
+    // Combine Address
+    const new_address = `${address}|${kecamatan}|${kelurahan}|${rt}|${rw}|${kodepos}`;
+    formValue.address_combine = new_address;
+
+    const propertiesToRemove = [
+      'address',
+      'kecamatan',
+      'kelurahan',
+      'rt',
+      'rw',
+      'kodepos',
+    ];
+
+    // Filtering To Remove Properties Unused Properties
+    const newFormValue = Object.fromEntries(
+      Object.entries(formValue).filter(
+        ([key]) => !propertiesToRemove.includes(key),
+      ),
+    );
+
+    console.log(newFormValue);
   }
-  console.log(errors);
+
+  const notify = () =>
+    toast.error('Form masih ada yang kosong, silahkan dicek kembali.', {
+      position: toast.POSITION.TOP_RIGHT,
+    });
 
   function handleDecrementTab() {
     if (currentTab > tabs[0].id && currentTab <= tabs.length) {
@@ -173,6 +235,15 @@ const Add_PPDB = () => {
     }
   }
 
+  useEffect(() => {
+    if (Object.keys(errors).length > 0) {
+      notify();
+      return;
+    }
+  }, [errors]);
+
+  console.log(errors);
+
   return (
     <DefaultLayout>
       <FormLayout title="Formulir Pendaftaran Siswa Baru">
@@ -183,49 +254,42 @@ const Add_PPDB = () => {
             setCurrentTab={setCurrentTab}
           />
 
-          <form onSubmit={handleSubmit(handleOnSubmit)}>
-            {currentTab == 1 && <Form1Admin register={register} />}
-            {currentTab == 2 && <Form2 register={register} />}
-            {currentTab == 3 && <Form3 register={register} />}
-            {currentTab == 4 && (
-              <Form4
-                register={register}
-                getValue={getValues}
-                setValue={setValue}
-                control={control}
-              />
-            )}
-            {currentTab == 5 && (
-              <Form5
-                register={register}
-                getValue={getValues}
-                setValue={setValue}
-                control={control}
-              />
-            )}
-            {currentTab == 6 && <Form6 register={register} />}
-            {currentTab == 7 && <Form7 register={register} />}
-            {currentTab == 8 && <Form8 register={register} />}
+          <FormProvider {...form}>
+            <form onSubmit={handleSubmit(handleOnSubmit)}>
+              {currentTab == 1 && <Form1Admin />}
+              {currentTab == 2 && <Form2 />}
+              {currentTab == 3 && <Form3 />}
+              {currentTab == 4 && <Form4 />}
+              {currentTab == 5 && <Form5 />}
+              {currentTab == 6 && <Form6 />}
+              {currentTab == 7 && <Form7 />}
+              {currentTab == 8 && <Form8 />}
 
-            <div className="w-full grid grid-cols-3 gap-[1.2em] mt-[3em] ">
-              {currentTab > 1 && (
-                <Button bg="primary" size="sm" onClick={handleDecrementTab}>
-                  <BiChevronLeft className="text-[1.7em] text-white" />
-                  Sebelumnya
+              <div className="w-full grid grid-cols-3 gap-[1.2em] mt-[5em] ">
+                {currentTab > 1 && (
+                  <Button bg="primary" size="sm" onClick={handleDecrementTab}>
+                    <BiChevronLeft className="text-[1.7em] text-white" />
+                    Sebelumnya
+                  </Button>
+                )}
+                {currentTab < tabs.length && (
+                  <Button bg="primary" size="sm" onClick={handleIncrementTab}>
+                    Lanjut
+                    <MdNavigateNext className="text-[1.7em] text-white" />
+                  </Button>
+                )}
+                <Button
+                  type="submit"
+                  bg="tertiary"
+                  size="sm"
+                  onClick={() => {}}
+                >
+                  <BsFillSendFill />
+                  Submit
                 </Button>
-              )}
-              {currentTab < tabs.length && (
-                <Button bg="primary" size="sm" onClick={handleIncrementTab}>
-                  Lanjut
-                  <MdNavigateNext className="text-[1.7em] text-white" />
-                </Button>
-              )}
-              <Button type="submit" bg="tertiary" size="sm" onClick={() => {}}>
-                <BsFillSendFill />
-                Submit
-              </Button>
-            </div>
-          </form>
+              </div>
+            </form>
+          </FormProvider>
         </div>
       </FormLayout>
 

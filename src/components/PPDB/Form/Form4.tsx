@@ -1,9 +1,13 @@
+import { useEffect } from 'react';
+import { useFieldArray, useFormContext } from 'react-hook-form';
+
 // Icon
 import { BsPlusCircleFill } from 'react-icons/bs';
 import { MdDelete } from 'react-icons/md';
 
 // Utils
 import { uuidv4 } from '../../../utils/Helper';
+import { typeAchievements, year } from '../../../utils/Data';
 
 // Type
 import Button from '../../Button';
@@ -12,26 +16,8 @@ import Button from '../../Button';
 import InputSelect from '../../forms_items/InputSelect';
 import TextArea from '../../forms_items/TextArea';
 
-import { useEffect } from 'react';
-import { useFieldArray } from 'react-hook-form';
-
-interface FormPPDB {
-  register: any;
-  getValue: any;
-  setValue: any;
-  control: any;
-}
-
-const Form4: React.FC<FormPPDB> = ({
-  register,
-  control,
-  getValue,
-  setValue,
-}) => {
-  const style = {
-    titleForm: 'font-semibold text-[1.5em] text-black mb-5 underline',
-    wrapperInput: 'grid lg:grid-cols-3 md:grid-cols-2 gap-[1.8em] mb-10',
-  };
+const Form4: React.FC = () => {
+  const { control } = useFormContext();
 
   const { fields, append, remove } = useFieldArray({
     control,
@@ -50,6 +36,11 @@ const Form4: React.FC<FormPPDB> = ({
     append(scholarship);
   };
 
+  const style = {
+    titleForm: 'font-semibold text-[1.5em] text-black mb-5 underline',
+    wrapperInput: 'grid lg:grid-cols-3 md:grid-cols-2 gap-[1.8em] mb-10',
+  };
+
   return (
     <>
       {fields.map((item, index) => (
@@ -59,25 +50,24 @@ const Form4: React.FC<FormPPDB> = ({
               name={`scholarships[${index}].type_scholarship`}
               label="Jenis Beasiswa"
               placeholder="......"
-              register={register}
+              options={typeAchievements}
             />
             <InputSelect
               name={`scholarships[${index}].year_start`}
               label="Tahun Mulai"
               placeholder="......"
-              register={register}
+              options={year}
             />
             <InputSelect
               name={`scholarships[${index}].year_finish`}
               label="Tahun Selesai"
               placeholder="......"
-              register={register}
+              options={year}
             />
             <TextArea
               name={`scholarships[${index}].description`}
               label="Keterangan"
               placeholder="......"
-              register={register}
             />
           </div>
 

@@ -1,6 +1,9 @@
 // Type
 import { FormPPDB } from '../../../Types/Index';
 
+// Utils
+import { competency } from '../../../utils/Data';
+
 // Component
 import Input from '../../forms_items/Input';
 import InputSelect from '../../forms_items/InputSelect';
@@ -8,54 +11,33 @@ import InputSelect from '../../forms_items/InputSelect';
 const Form1Admin: React.FC<FormPPDB> = ({ register }) => {
   return (
     <div className="grid grid-cols-3 gap-[1.8em]">
-      <Input
-        name="fullname"
-        label="Nama Lengkap"
-        placeholder="....."
-        register={register}
-      />
-      <Input
-        name="from_school"
-        label="Asal Sekolah"
-        placeholder="....."
-        register={register}
-      />
-      <Input
-        name="Phone"
-        label="No Telepon"
-        placeholder="....."
-        register={register}
-      />
+      <Input name="fullname" label="Nama Lengkap" placeholder="....." />
+      <Input name="from_school" label="Asal Sekolah" placeholder="....." />
+      <Input name="phone" label="No Telepon" placeholder="....." />
       <InputSelect
-        name="competency_1"
+        name="competency_pick_1"
         label="Pillihan Kompetensi 1"
         placeholder="......"
-        register={register}
+        options={competency}
       />
       <InputSelect
-        name="competency_2"
+        name="competency_pick_2"
         label="Pillihan Kompetensi 2"
         placeholder="......"
-        register={register}
+        options={competency}
       />
       <InputSelect
-        name="competency_3"
+        name="competency_pick_3"
         label="Pillihan Kompetensi 3"
         placeholder="......"
-        register={register}
+        options={competency}
       />
-      <Input
-        name="email"
-        label="Email"
-        placeholder="......"
-        register={register}
-      />
+      <Input name="email" label="Email" placeholder="......" />
       <Input
         type="password"
         name="password"
         label="Password"
         placeholder="......"
-        register={register}
       />
     </div>
   );

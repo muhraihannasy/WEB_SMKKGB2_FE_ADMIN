@@ -1,10 +1,13 @@
+import { useFormContext } from 'react-hook-form';
+
 interface InputDateProps {
   name: string;
   label: string;
-  register: any;
 }
 
-const InputDate: React.FC<InputDateProps> = ({ label, register, name }) => {
+const InputDate: React.FC<InputDateProps> = ({ label, name }) => {
+  const { register } = useFormContext();
+
   return (
     <div>
       <label className="mb-[0.7em] block text-black dark:text-white">

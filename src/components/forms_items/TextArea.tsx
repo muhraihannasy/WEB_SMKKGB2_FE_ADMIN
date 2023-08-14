@@ -1,17 +1,14 @@
+import { useFormContext } from 'react-hook-form';
+
 type TextareaProps = {
   name: string;
-  register: any;
   label: string;
   placeholder?: string;
-  control?: any;
 };
 
-const TextArea: React.FC<TextareaProps> = ({
-  name,
-  label,
-  placeholder,
-  register,
-}) => {
+const TextArea: React.FC<TextareaProps> = ({ name, label, placeholder }) => {
+  const { register } = useFormContext();
+
   return (
     <div>
       <label className="mb-3 block text-black dark:text-white">{label}</label>

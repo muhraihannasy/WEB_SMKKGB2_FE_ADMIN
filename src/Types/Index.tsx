@@ -1,3 +1,5 @@
+// ============= PPDB ============= //
+
 interface Scholarship {
   id: string;
   type_scholarship: string;
@@ -15,9 +17,7 @@ interface Achievement {
   organizer: string;
 }
 
-interface FormPPDB {
-  register: any;
-}
+interface FormPPDB {}
 
 interface Tabs {
   id: number;
@@ -29,5 +29,7 @@ interface TabFormPPDB {
   currentTab: number;
   setCurrentTab: (val: number) => void;
 }
+
+// ============= PPDB ============= //
 
 export type { TabFormPPDB, FormPPDB };

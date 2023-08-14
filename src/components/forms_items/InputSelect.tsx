@@ -1,22 +1,21 @@
 import React, { useState } from 'react';
+import { useFormContext } from 'react-hook-form';
 
 interface InputSelectProps {
   placeholder: string;
   label: string;
   name: string;
-  register: any;
   options?: any[];
-  control?: any;
 }
 
 const InputSelect: React.FC<InputSelectProps> = ({
   label,
   placeholder,
   options,
-  register,
   name,
-  control,
 }) => {
+  const { register } = useFormContext();
+
   const className =
     'relative z-20 w-full rounded-lg appearance-none rounded border border-stroke bg-transparent h-[2.8125em]  px-4 outline-none transition focus:border-primary active:border-primary dark:border-form-strokedark dark:bg-form-input';
 
@@ -33,7 +32,7 @@ const InputSelect: React.FC<InputSelectProps> = ({
           {...register(name)}
         >
           <option value="">Pilih...</option>
-          {[1, 2, 3, 4].map((item, i) => (
+          {options.map((item, i) => (
             <option value={item} key={i}>
               {item}
             </option>

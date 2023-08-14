@@ -1,4 +1,8 @@
+import { useFormContext } from 'react-hook-form';
+
 const InputFile = ({ label, field, imageUploads, setImageUploads }) => {
+  const { setValue } = useFormContext();
+
   return (
     <div>
       <div className="preview w-[9em] h-[9em] rounded-md overflow-hidden mb-4 bg-meta-2 flex items-center justify-center">
