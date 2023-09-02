@@ -10,9 +10,6 @@
 }
 
 /* Chrome, Edge, and Safari */
-*::-webkit-scrollbar {
-  width: 15px;
-}
 
 *::-webkit-scrollbar-track {
   background: var(--primary);

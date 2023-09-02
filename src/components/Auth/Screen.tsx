@@ -1,7 +1,7 @@
 const Screen = () => {
   return (
     <>
-      <div className="flex items-center justify-center bg-primary text-white relative">
+      <div className="max-[1045px]:hidden flex items-center justify-center bg-primary text-white relative px-[2.5em]">
         <svg
           width="980"
           height="1944"
@@ -99,7 +99,7 @@ const Screen = () => {
           />
         </svg>
 
-        <div className="w-[40em]">
+        <div className="">
           <img
             src="https://smkkgb2.sch.id/assets/image/logo.png"
             alt=""
