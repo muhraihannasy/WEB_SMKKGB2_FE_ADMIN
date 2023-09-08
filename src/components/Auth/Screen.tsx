@@ -1,7 +1,7 @@
 const Screen = () => {
   return (
     <>
-      <div className="flex items-center justify-center bg-primary text-white relative">
+      <div className="max-[1009px]:h-[14em]  flex items-center justify-center bg-primary text-white relative px-[2em]">
         <svg
           width="980"
           height="1944"
@@ -99,14 +99,14 @@ const Screen = () => {
           />
         </svg>
 
-        <div className="w-[40em]">
+        <div className="w-[40em] max-[1009px]:hidden">
           <img
             src="https://smkkgb2.sch.id/assets/image/logo.png"
             alt=""
             className="w-[6em] mb-4"
           />
 
-          <h2 className="font-semibold text-[3em] leading-tight  mb-4">
+          <h2 className="font-semibold text-[2.6em] leading-tight mb-4">
             Welcome To <br />
             <span className="underline">SMK Karya Guna Bhakti 2</span> <br />
             <span className="underline">Kota Bekasi.</span>
