@@ -1,11 +1,7 @@
 const Screen = () => {
   return (
     <>
-<<<<<<< HEAD
-      <div className="max-[1045px]:hidden flex items-center justify-center bg-primary text-white relative px-[2.5em]">
-=======
-      <div className="max-[1009px]:h-[14em]  flex items-center justify-center bg-primary text-white relative px-[2em]">
->>>>>>> 365daffb511172c95c3d421dd483bda1ef6aff9d
+      <div className="max-[1045px] flex items-center justify-center bg-primary text-white relative px-[2em]">
         <svg
           width="980"
           height="1944"
@@ -103,11 +99,7 @@ const Screen = () => {
           />
         </svg>
 
-<<<<<<< HEAD
-        <div className="">
-=======
         <div className="w-[40em] max-[1009px]:hidden">
->>>>>>> 365daffb511172c95c3d421dd483bda1ef6aff9d
           <img
             src="https://smkkgb2.sch.id/assets/image/logo.png"
             alt=""
@@ -130,5 +122,4 @@ const Screen = () => {
     </>
   );
 };
-
 export default Screen;
