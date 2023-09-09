@@ -28,6 +28,7 @@ import Add_PPDB_Student from './pages/PPDB/Add_PPDB_Student';
 import Add_PPDB from './pages/PPDB/Add_PPDB';
 
 import 'react-toastify/dist/ReactToastify.css';
+import Verification from './pages/Authentication/Verification';
 
 function App() {
   const [loading, setLoading] = useState<boolean>(true);
@@ -85,6 +86,7 @@ function App() {
         <Route path="/ui/buttons" element={<Buttons />} />
         <Route path="/auth/signin" element={<SignIn />} />
         <Route path="/auth/signup" element={<SignUp />} />
+        <Route path="/auth/verification" element={<Verification />} />
       </Routes>
     </>
   );
