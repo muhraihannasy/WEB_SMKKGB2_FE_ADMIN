@@ -30,7 +30,7 @@ const SignIn = () => {
   }
 
   return (
-    <div className="max-[1045px]:grid-cols-1  grid grid-cols-2 fixed top-0 left-0 w-full min-[1045px]:h-[100vh] h-full max-[1045px]:overflow-y-scroll">
+    <div className="max-[1045px]:grid-cols-1 grid grid-cols-2 fixed top-0 left-0 w-full min-[1045px]:h-[100vh] h-full max-[1045px]:overflow-y-scroll">
       <div className="absolute invisible z-[-1] max-[1045px]:visible w-full bg-primary h-full overflow-hidden">
         <svg
           width="500"
@@ -130,13 +130,13 @@ const SignIn = () => {
         </svg>
       </div>
 
-      <div className="max-[1045px]:fixed max-[1045px]:bottom-0 max-[1045px]:rounded-tr-[2em] max-[1045px]:rounded-tl-[2em] max-[1045px]:order-1 flex min-[1045px]:items-center justify-center bg-white max-[500px]:px-[2em] max-[1045px]:mt-[10em] max-[1045px]:h-max max-[1045px]:pb-[3em] max-[1045px]:overflow-y-scroll max-[1045px]:pt-[4em]">
-        <div>
+      <div className="max-[1045px]:fixed max-[1045px]:w-full max-[1045px]:bottom-0 max-[1045px]:rounded-tr-[2em] max-[1045px]:rounded-tl-[2em] max-[1045px]:order-1 flex min-[1045px]:items-center justify-center bg-white max-[500px]:px-[2em] max-[1045px]:mt-[10em] max-[1045px]:h-max max-[1045px]:pb-[3em] max-[1045px]:overflow-y-scroll max-[1045px]:pt-[4em]">
+        <div className="max-[500px]:w-full max-[1045px]:mx-auto">
           <h2 className="text-[2em] mb-10 font-semibold text-black">Sign In</h2>
 
           <form
             onSubmit={handleSubmit(handleOnSubmit)}
-            className="min-[500px]:w-[27em] w-full"
+            className="min-[500px]:w-[27em]  w-full"
           >
             <div className="flex flex-col gap-4">
               <Input
@@ -175,7 +175,7 @@ const SignIn = () => {
         </div>
       </div>
 
-      {/* <Screen /> */}
+      <Screen />
     </div>
   );
 };
