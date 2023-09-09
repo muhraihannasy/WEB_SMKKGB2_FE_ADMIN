@@ -1,9 +1,13 @@
+import { useEffect } from 'react';
+import { useFieldArray, useFormContext } from 'react-hook-form';
+
 // Icon
 import { BsPlusCircleFill } from 'react-icons/bs';
 import { MdDelete } from 'react-icons/md';
 
 // Utils
 import { uuidv4 } from '../../../utils/Helper';
+import { typeAchievements, year } from '../../../utils/Data';
 
 // Type
 import Button from '../../Button';
@@ -11,27 +15,9 @@ import Button from '../../Button';
 // Component
 import InputSelect from '../../forms_items/InputSelect';
 import TextArea from '../../forms_items/TextArea';
-import { useActionData } from 'react-router-dom';
-import { useEffect } from 'react';
-import { Controller, useFieldArray } from 'react-hook-form';
 
-interface FormPPDB {
-  register: any;
-  getValue: any;
-  setValue: any;
-  control: any;
-}
-
-const Form4: React.FC<FormPPDB> = ({
-  register,
-  control,
-  getValue,
-  setValue,
-}) => {
-  const style = {
-    titleForm: 'font-semibold text-[1.5em] text-black mb-5 underline',
-    wrapperInput: 'grid lg:grid-cols-3 md:grid-cols-2 gap-4 mb-10',
-  };
+const Form4: React.FC = () => {
+  const { control } = useFormContext();
 
   const { fields, append, remove } = useFieldArray({
     control,
@@ -50,54 +36,48 @@ const Form4: React.FC<FormPPDB> = ({
     append(scholarship);
   };
 
-  const RenderDeleteButton = (position: any) => {
-    return (
-      <>
-        <Button bg="danger" size="sm" onClick={() => remove(position)}>
-          Delete Beasiswa
-        </Button>
-        <br />
-        <br />
-      </>
-    );
+  const style = {
+    titleForm: 'font-semibold text-[1.5em] text-black mb-5 underline',
+    wrapperInput: 'grid lg:grid-cols-3 md:grid-cols-2 gap-[1.8em] mb-10',
   };
 
   return (
     <>
       {fields.map((item, index) => (
-        <>
-          <div key={item.id} className={style.wrapperInput}>
+        <div key={item.id} className="mb-[2em]">
+          <div className={style.wrapperInput}>
             <InputSelect
               name={`scholarships[${index}].type_scholarship`}
               label="Jenis Beasiswa"
               placeholder="......"
-              control={control}
-              register={register}
+              options={typeAchievements}
             />
             <InputSelect
               name={`scholarships[${index}].year_start`}
               label="Tahun Mulai"
               placeholder="......"
-              control={control}
-              register={register}
+              options={year}
             />
             <InputSelect
               name={`scholarships[${index}].year_finish`}
               label="Tahun Selesai"
               placeholder="......"
-              control={control}
-              register={register}
+              options={year}
             />
             <TextArea
               name={`scholarships[${index}].description`}
               label="Keterangan"
               placeholder="......"
-              control={control}
-              register={register}
             />
           </div>
-          {fields.length > 1 && <RenderDeleteButton position={index} />}
-        </>
+
+          {fields.length > 1 && (
+            <Button bg="danger" size="sm" onClick={() => remove(index)}>
+              <MdDelete />
+              Delete Beasiswa
+            </Button>
+          )}
+        </div>
       ))}
 
       <Button bg="primary" size="sm" onClick={handleAddScholarship}>

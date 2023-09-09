@@ -1,4 +1,6 @@
 import { ReactNode, useState } from 'react';
+
+// Component
 import Header from '../components/Header';
 import Sidebar from '../components/Sidebar';
 
@@ -11,6 +13,8 @@ const DefaultLayout = ({ children }: DefaultLayoutProps) => {
 
   return (
     <div className="dark:bg-boxdark-2 dark:text-bodydark">
+      {/* Toast */}
+
       {/* <!-- ===== Page Wrapper Start ===== --> */}
       <div className="flex h-screen overflow-hidden">
         {/* <!-- ===== Sidebar Start ===== --> */}

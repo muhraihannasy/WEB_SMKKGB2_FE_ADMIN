@@ -10,14 +10,22 @@
 }
 
 /* Chrome, Edge, and Safari */
+<<<<<<< HEAD
+=======
+*::-webkit-scrollbar {
+  width: 10px;
+  height: 5px;
+  scroll-behavior: smooth;
+}
+>>>>>>> 365daffb511172c95c3d421dd483bda1ef6aff9d
 
 *::-webkit-scrollbar-track {
-  background: var(--primary);
+  background: #f7f7f7;
   border-radius: 5px;
 }
 
 *::-webkit-scrollbar-thumb {
-  background-color: var(--secondary);
+  background-color: #c4c4c4;
   border-radius: 14px;
   border: 3px solid var(--primary);
 }
