@@ -54,9 +54,17 @@ const SignIn = () => {
     }
   }, [errors]);
 
+  useEffect(() => {
+    document.querySelector('body')?.classList.add('bg-white');
+
+    return () => {
+      document.querySelector('body')?.classList.remove('bg-white');
+    };
+  }, []);
+
   return (
     <main className="max-[1045px]:grid-cols-1 grid grid-cols-2 top-0 left-0 w-full min-[1045px]:h-[100vh] bg-danger">
-      <div className="h-[100vh] max-[1045px]:relative max-[1045px]:w-full max-[1045px]:rounded-tr-[2em] max-[1045px]:rounded-tl-[2em] max-[1045px]:order-1 flex min-[1045px]:items-center justify-center bg-white max-[1045px]:mt-[-12em] max-[1045px]:pt-[3em] z-[9]">
+      <div className="max-[1045px]:relative max-[1045px]:w-full max-[1045px]:rounded-tr-[2em] max-[1045px]:rounded-tl-[2em] max-[1045px]:order-1 flex min-[1045px]:items-center justify-center bg-white max-[1045px]:mt-[-12em] max-[1045px]:pt-[3em] z-[9]">
         <div className="max-[1045px]:px-[2em] max-[500px]:w-full max-[1045px]:mx-auto">
           <h2 className="text-[2em] mb-10 font-semibold text-black">Login</h2>
 
@@ -93,7 +101,7 @@ const SignIn = () => {
                 Sign In
               </Button>
 
-              <p className="text-center mt-6">
+              <p className="text-center mt-6 pb-10">
                 Belum Memiliki Akun ?{' '}
                 <Link
                   to={ROUTE.Auth.register}
