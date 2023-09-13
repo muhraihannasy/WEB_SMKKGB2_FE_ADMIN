@@ -5,6 +5,7 @@ import { ToastContainer } from 'react-toastify';
 // Pages
 import SignIn from './pages/Authentication/SignIn';
 import SignUp from './pages/Authentication/SignUp';
+import Verification from './pages/Authentication/Verification';
 import Calendar from './pages/Calendar';
 import Chart from './pages/Chart';
 import ECommerce from './pages/Dashboard/ECommerce';
@@ -28,7 +29,8 @@ import Add_PPDB_Student from './pages/PPDB/Add_PPDB_Student';
 import Add_PPDB from './pages/PPDB/Add_PPDB';
 
 import 'react-toastify/dist/ReactToastify.css';
-import Verification from './pages/Authentication/Verification';
+import ROUTE from './route';
+import { Toaster } from 'react-hot-toast';
 
 function App() {
   const [loading, setLoading] = useState<boolean>(true);
@@ -51,10 +53,10 @@ function App() {
     <p className=" text-center text-danger">Failed to lead app</p>
   ) : (
     <>
+      <Toaster position="top-right" reverseOrder={false} />
       <ToastContainer />
 
       <Routes>
-        <Route path="/" element={<NavigateFromBaseURl />} />
         <Route path="/dashboard" element={<ECommerce />} />
         <Route path="/calendar" element={<Calendar />} />
 
@@ -64,11 +66,8 @@ function App() {
         <Route path="/administrator/informations" element={<Information />} />
 
         {/* PPDB */}
-        <Route path="/administrator/ppdb" element={<PPDB />} />
-        <Route
-          path="/administrator/ppdb/tambah_perserta"
-          element={<Add_PPDB />}
-        />
+        <Route path={ROUTE.Administrator.Ppdb.list} element={<PPDB />} />
+        <Route path={ROUTE.Administrator.Ppdb.add} element={<Add_PPDB />} />
         <Route path="/administrator/ppdb" element={<PPDB />} />
 
         {/* Artikel */}
@@ -84,24 +83,12 @@ function App() {
         <Route path="/chart" element={<Chart />} />
         <Route path="/ui/alerts" element={<Alerts />} />
         <Route path="/ui/buttons" element={<Buttons />} />
-        <Route path="/auth/signin" element={<SignIn />} />
-        <Route path="/auth/signup" element={<SignUp />} />
-        <Route path="/auth/verification" element={<Verification />} />
+        <Route path={ROUTE.Auth.login} element={<SignIn />} />
+        <Route path={ROUTE.Auth.register} element={<SignUp />} />
+        <Route path={ROUTE.Auth.veritification} element={<Verification />} />
       </Routes>
     </>
   );
-}
-
-function NavigateFromBaseURl() {
-  const navigate = useNavigate();
-  useEffect(() => {
-    const url = window.location.href;
-    if (url.includes(environment.siteUrl)) {
-      navigate('/dashboard');
-    }
-  }, []);
-
-  return null;
 }
 
 export default App;

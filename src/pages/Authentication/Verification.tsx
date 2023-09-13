@@ -1,5 +1,3 @@
-import React from 'react';
-
 const Verification = () => {
   return (
     <section className="flex items-center justify-center h-[100vh] px-[1.5em]">

@@ -10,14 +10,6 @@
 }
 
 /* Chrome, Edge, and Safari */
-<<<<<<< HEAD
-=======
-*::-webkit-scrollbar {
-  width: 10px;
-  height: 5px;
-  scroll-behavior: smooth;
-}
->>>>>>> 365daffb511172c95c3d421dd483bda1ef6aff9d
 
 *::-webkit-scrollbar-track {
   background: #f7f7f7;
@@ -196,3 +188,54 @@ span.flatpickr-weekday,
 }
 
 /* Form */
+
+/* CSS Keyframes */
+@keyframes fadeInRight {
+  0% {
+    opacity: 0;
+    transform: translate(2rem);
+  }
+  100% {
+    opacity: 1;
+    transform: translate(0);
+  }
+}
+
+@keyframes fadeOutLeft {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+/* CSS Animation Effects */
+.fadeInRight {
+  animation: fadeInRight 300ms ease-out;
+}
+
+.fadeOutLeft {
+  animation: fadeOutLeft 300ms ease-in;
+}
+
+.wiggle {
+  animation: wiggle 1s ease-in-out infinite;
+}
+
+/* Define the wiggle keyframes separately */
+@keyframes wiggle {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  25% {
+    transform: translateX(-5px) rotate(-5deg);
+  }
+  50% {
+    transform: translateX(5px) rotate(5deg);
+  }
+  75% {
+    transform: translateX(-5px) rotate(-5deg);
+  }
+}

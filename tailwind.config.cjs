@@ -52,6 +52,31 @@ module.exports = {
       ...defaultTheme.screens,
     },
     extend: {
+      animation: {
+        enter: 'fadeInRight 300ms ease-out',
+        leave: 'fadeOutLeft 300ms ease-in',
+        wiggle: 'wiggle 1s ease-in-out infinite',
+      },
+      keyframes: {
+        fadeInRight: {
+          '0%': {
+            opacity: '0',
+            transform: 'translate(2rem)',
+          },
+          '100%': {
+            opacity: '1',
+            transform: 'translate(0)',
+          },
+        },
+        fadeOutLeft: {
+          '0%': {
+            opacity: '1',
+          },
+          '100%': {
+            opacity: '0',
+          },
+        },
+      },
       fontSize: {
         'title-xxl': ['44px', '55px'],
         'title-xl': ['36px', '45px'],

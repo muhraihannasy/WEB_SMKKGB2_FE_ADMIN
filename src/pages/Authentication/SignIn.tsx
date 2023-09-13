@@ -7,6 +7,7 @@ import { DevTool } from '@hookform/devtools';
 import Input from '../../components/forms_items/Input';
 import Screen from '../../components/Auth/Screen';
 import Button from '../../components/Button';
+import { toastSuccess } from '../../components/Toast/index';
 
 // Images
 import LoginBackground from '/images/login.jpg';
@@ -27,6 +28,7 @@ const SignIn = () => {
 
   function handleOnSubmit(formValue: FormValue) {
     console.log(formValue);
+    toastSuccess();
   }
 
   return (
@@ -57,7 +59,7 @@ const SignIn = () => {
                 Lupa Password ?
               </Link>
 
-              <Button bg="primary" size="full">
+              <Button type="submit" bg="primary" size="full">
                 Sign In
               </Button>
 
