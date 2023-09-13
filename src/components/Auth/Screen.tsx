@@ -1,14 +1,13 @@
 const Screen = () => {
   return (
     <>
-      <div className="max-[1045px] flex items-center justify-center bg-primary text-white relative px-[2em]">
+      <div className="max-[1045px]:h-[20em]  flex items-center justify-center bg-primary text-white relative overflow-hidden px-[2em]">
         <svg
           width="980"
-          height="1944"
           viewBox="0 0 1369 1944"
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
-          className="absolute top-[-50em] left-[4em] opacity-[9%]"
+          className="absolute top-[-50em] left-[4em] opacity-[9%] max-[1045px]:opacity-100 max-[1045px]:top-[-20em] max-[1045px]:left-[10em] max-[1045px]:w-[400px]"
         >
           <path
             d="M878.5 986C878.5 1060.29 857.309 1127.48 823.124 1176.06C788.936 1224.64 741.847 1254.5 690 1254.5C638.153 1254.5 591.064 1224.64 556.876 1176.06C522.691 1127.48 501.5 1060.29 501.5 986C501.5 911.713 522.691 844.523 556.876 795.944C591.064 747.361 638.153 717.5 690 717.5C741.847 717.5 788.936 747.361 823.124 795.944C857.309 844.523 878.5 911.713 878.5 986Z"

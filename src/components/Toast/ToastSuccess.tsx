@@ -5,7 +5,7 @@ function toastSuccess() {
     <div
       className={` 
          ${t.visible ? 'fadeInRight' : 'wiggle'}
-    flex w-full max-w-[30em] border-l-6 border-[#34D399] bg-[#e0f9f0] shadow-md p-5 rounded-lg`}
+    flex w-full max-w-[20em] border-l-6 border-[#34D399] bg-[#e0f9f0] shadow-md p-5 rounded-lg`}
     >
       <div className="mr-5 flex h-9 w-full max-w-[36px] items-center justify-center rounded-lg bg-[#34D399]">
         <svg
