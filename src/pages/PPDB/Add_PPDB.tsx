@@ -9,6 +9,7 @@ import { toast } from 'react-toastify';
 
 // Helper
 import { uuidv4 } from '../../utils/Helper';
+import { PPDB_ADMIN_ADD_FAKER } from '../../utils/Faker';
 
 // Icon
 import { BsFillSendFill } from 'react-icons/bs';
@@ -30,6 +31,7 @@ import Form5 from '../../components/PPDB/Form/Form5';
 import Form6 from '../../components/PPDB/Form/Form6';
 import Form7 from '../../components/PPDB/Form/Form7';
 import Form8 from '../../components/PPDB/Form/Form8';
+import { toastError } from '../../components/Toast';
 
 const tabs = [
   {
@@ -68,37 +70,46 @@ const tabs = [
 
 const schema = yup
   .object({
-    fullname: yup.string().required(),
-    from_school: yup.string().required(),
-    phone: yup.string().required(),
-    type_registration: yup.string().required(),
-    weight: yup.string().required(),
-    height: yup.string().required(),
-    special_needs: yup.string().required(),
-    religion: yup.string().required(),
-    birth_place: yup.string().required(),
-    birth_date: yup.string().required(),
-    address: yup.string().required(),
-    rt: yup.string().required(),
-    rw: yup.string().required(),
-    kelurahan: yup.string().required(),
-    kecamatan: yup.string().required(),
-    kodepos: yup.string().required(),
-    nisn: yup.string().required(),
-    // nisn_image: yup.string().required(),
-    // kartu_keluarga_image: yup.string().required(),
-    no_serial_skhus: yup.string().required(),
-    no_serial_diploma: yup.string().required(),
-    no_examinee: yup.string().required(),
-    competency_pick_1: yup.string().required(),
-    competency_pick_2: yup.string().required(),
-    competency_pick_3: yup.string().required(),
-    extracurricular_1: yup.string().required(),
-    extracurricular_2: yup.string().required(),
-    uniform_1: yup.string().required(),
-    uniform_2: yup.string().required(),
-    uniform_3: yup.string().required(),
-    uniform_4: yup.string().required(),
+    fullname: yup.string().required('Field harus Diisi'),
+    email: yup
+      .string()
+      .email('Email tidak valid')
+      .required('Email wajib diisi'),
+    password: yup
+      .string()
+      .min(6, 'Password harus memiliki minimal 6 karakter')
+      .required('Password wajib diisi'),
+    from_school: yup.string().required('Field harus Diisi'),
+    phone: yup.string().required('Field harus Diisi'),
+    type_registration: yup.string().required('Field harus Diisi'),
+    weight: yup.string().required('Field harus Diisi'),
+    height: yup.string().required('Field harus Diisi'),
+    special_needs: yup.string().required('Field harus Diisi'),
+    religion: yup.string().required('Field harus Diisi'),
+    birth_place: yup.string().required('Field harus Diisi'),
+    birth_date: yup.string().required('Field harus Diisi'),
+    address: yup.string().required('Field harus Diisi'),
+    rt: yup.string().required('Field harus Diisi'),
+    rw: yup.string().required('Field harus Diisi'),
+    kelurahan: yup.string().required('Field harus Diisi'),
+    kecamatan: yup.string().required('Field harus Diisi'),
+    kodepos: yup.string().required('Field harus Diisi'),
+    nisn: yup.string().required('Field harus Diisi'),
+    nik: yup.string().required('Field harus Diisi'),
+    nisn_image: yup.string().required('Field harus Diisi'),
+    kartu_keluarga_image: yup.string().required('Field harus Diisi'),
+    no_serial_skhus: yup.string().required('Field harus Diisi'),
+    no_serial_diploma: yup.string().required('Field harus Diisi'),
+    no_examinee: yup.string().required('Field harus Diisi'),
+    competency_pick_1: yup.string().required('Field harus Diisi'),
+    competency_pick_2: yup.string().required('Field harus Diisi'),
+    competency_pick_3: yup.string().required('Field harus Diisi'),
+    extracurricular_1: yup.string().required('Field harus Diisi'),
+    extracurricular_2: yup.string().required('Field harus Diisi'),
+    uniform_1: yup.string().required('Field harus Diisi'),
+    uniform_2: yup.string().required('Field harus Diisi'),
+    uniform_3: yup.string().required('Field harus Diisi'),
+    uniform_4: yup.string().required('Field harus Diisi'),
 
     // Optinal
     no_kks: yup.string(),
@@ -112,21 +123,21 @@ const schema = yup
     image_kip: yup.string(),
 
     // Parent
-    father_name: yup.string().required(),
-    father_nik: yup.string().required(),
-    father_birth_place: yup.string().required(),
-    father_birth_date: yup.string().required(),
-    father_education: yup.string().required(),
-    father_job: yup.string().required(),
-    father_income: yup.string().required(),
+    father_name: yup.string().required('Field harus Diisi'),
+    father_nik: yup.string().required('Field harus Diisi'),
+    father_birth_place: yup.string().required('Field harus Diisi'),
+    father_birth_date: yup.string().required('Field harus Diisi'),
+    father_education: yup.string().required('Field harus Diisi'),
+    father_job: yup.string().required('Field harus Diisi'),
+    father_income: yup.string().required('Field harus Diisi'),
 
-    mother_name: yup.string().required(),
-    mother_nik: yup.string().required(),
-    mother_birth_place: yup.string().required(),
-    mother_birth_date: yup.string().required(),
-    mother_education: yup.string().required(),
-    mother_job: yup.string().required(),
-    mother_income: yup.string().required(),
+    mother_name: yup.string().required('Field harus Diisi'),
+    mother_nik: yup.string().required('Field harus Diisi'),
+    mother_birth_place: yup.string().required('Field harus Diisi'),
+    mother_birth_date: yup.string().required('Field harus Diisi'),
+    mother_education: yup.string().required('Field harus Diisi'),
+    mother_job: yup.string().required('Field harus Diisi'),
+    mother_income: yup.string().required('Field harus Diisi'),
 
     scholarships: yup.array(
       yup.object({
@@ -148,7 +159,7 @@ const schema = yup
       }),
     ),
   })
-  .required();
+  .required('Field harus Diisi');
 
 type FormData = yup.InferType<typeof schema>;
 
@@ -157,10 +168,7 @@ const Add_PPDB = () => {
 
   const form = useForm<FormData>({
     defaultValues: {
-      image_kip: "",
-      image_kps: "",
-      image_kks: "",
-      
+      ...PPDB_ADMIN_ADD_FAKER(),
       scholarships: [
         {
           id: uuidv4(),
@@ -217,9 +225,7 @@ const Add_PPDB = () => {
   }
 
   const notify = () =>
-    toast.error('Form masih ada yang kosong, silahkan dicek kembali.', {
-      position: toast.POSITION.TOP_RIGHT,
-    });
+    toastError('Form masih ada yang kosong, silahkan dicek kembali.');
 
   function handleDecrementTab() {
     if (currentTab > tabs[0].id && currentTab <= tabs.length) {

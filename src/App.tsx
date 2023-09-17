@@ -31,6 +31,7 @@ import Add_PPDB from './pages/PPDB/Add_PPDB';
 import 'react-toastify/dist/ReactToastify.css';
 import ROUTE from './route';
 import { Toaster } from 'react-hot-toast';
+import UserProvider from './context/UserContext';
 
 function App() {
   const [loading, setLoading] = useState<boolean>(true);
@@ -52,12 +53,12 @@ function App() {
   return loading ? (
     <p className=" text-center text-danger">Failed to lead app</p>
   ) : (
-    <>
+    <UserProvider>
       <Toaster position="top-right" reverseOrder={false} />
       <ToastContainer />
 
       <Routes>
-        <Route path="/dashboard" element={<ECommerce />} />
+        <Route path={ROUTE.Administrator.Dashboard} element={<ECommerce />} />
         <Route path="/calendar" element={<Calendar />} />
 
         <Route path="/administrator/users" element={<Users />} />
@@ -87,7 +88,7 @@ function App() {
         <Route path={ROUTE.Auth.register} element={<SignUp />} />
         <Route path={ROUTE.Auth.veritification} element={<Verification />} />
       </Routes>
-    </>
+    </UserProvider>
   );
 }
 

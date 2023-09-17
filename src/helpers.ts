@@ -1,14 +1,10 @@
+export function getPreloader(isLoading: boolean) {
+  const preloader: any = document.getElementById('preloader');
+  preloader.style.display = '';
 
-export function getPreloader(isLoading:boolean) 
-{
-    const preloader:any = document.getElementById("preloader");
-    preloader.style.display = "";
-
-    if (isLoading) preloader.style.display = "none";
+  if (isLoading) preloader.style.display = 'none';
 }
 
-export function getToken() 
-{
-    return localStorage.getItem("acctkn");
+export function getToken() {
+  return localStorage.getItem('acc_tkn_exp_kgb');
 }
-

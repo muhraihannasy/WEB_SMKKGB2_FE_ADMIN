@@ -1,5 +1,5 @@
 // Third Party
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { FormProvider, useForm } from 'react-hook-form';
 import { DevTool } from '@hookform/devtools';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -15,6 +15,8 @@ import { toastError, toastSuccess } from '../../components/Toast/index';
 import LoginBackground from '/images/login.jpg';
 import { useEffect } from 'react';
 import ROUTE from '../../route';
+import { postData } from '../../utils/ApiUtils';
+import { useUserContext } from '../../context/UserContext';
 
 interface FormValue {
   email: string;
@@ -29,6 +31,9 @@ const formSchema = Yup.object().shape({
 });
 
 const SignIn = () => {
+  const { setCurrentUser, user } = useUserContext();
+  const navigate = useNavigate();
+
   const form = useForm<FormValue>({
     resolver: yupResolver(formSchema),
   });
@@ -39,20 +44,32 @@ const SignIn = () => {
     formState: { errors },
   } = form;
 
-  function handleOnSubmit(formValue: FormValue) {
-    console.log(formValue);
+  async function handleOnSubmit(formValue: FormValue) {
+    try {
+      const request = await postData('/auth/login', formValue);
+
+      const token = request.access_token;
+      localStorage.setItem('acc_tkn_exp_kgb', token);
+
+      const expired = new Date();
+      expired.setTime(expired.getHours() + 1);
+      localStorage.setItem('exp_aop', expired.toISOString());
+
+      setCurrentUser(request.user);
+
+      toastSuccess('Login Berhasil');
+
+      navigate(ROUTE.Administrator.Dashboard);
+    } catch (error: any) {
+      if (error.response.data.error == 'Unauthorized') {
+        toastError('Email atau Password Salah');
+      }
+    }
   }
 
-  useEffect(() => {
-    const keys = Object.keys(errors);
+  console.log('USER', user);
 
-    if (keys.length > 0) {
-      const firstErrorMessage = errors[keys[0]]?.message;
-      // Tidak ada pesan kesalahan, melanjutkan logika login.
-      // toastError(firstErrorMessage);
-      console.log();
-    }
-  }, [errors]);
+  // useEffect(() => {}, [errors]);
 
   useEffect(() => {
     document.querySelector('body')?.classList.add('bg-white');
@@ -79,14 +96,12 @@ const SignIn = () => {
                   name="email"
                   label="Email"
                   placeholder="Masukan Email"
-                  errors={errors}
                 />
                 <Input
                   type="password"
                   name="password"
                   label="Password"
                   placeholder="Masukan Password"
-                  errors={errors}
                 />
               </div>
 

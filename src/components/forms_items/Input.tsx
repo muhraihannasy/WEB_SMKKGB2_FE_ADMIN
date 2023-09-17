@@ -16,9 +16,11 @@ const Input: React.FC<InputProps> = ({
   type = 'text',
   placeholder = '',
   required = false,
-  errors,
 }) => {
-  const { register } = useFormContext();
+  const {
+    register,
+    formState: { errors },
+  } = useFormContext();
 
   const error = errors && errors[name] ? true : false;
 

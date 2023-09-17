@@ -20,6 +20,7 @@ import CoverOne from '../images/cover/cover-01.png';
 import userSix from '../images/user/user-06.png';
 import Button from '../../components/Button';
 import { useNavigate } from 'react-router-dom';
+import ROUTE from '../../route';
 
 const PPDB = () => {
   const columns = useMemo(
@@ -129,8 +130,7 @@ const PPDB = () => {
   const navigate = useNavigate();
 
   // Navigate
-  const NavigateToAddSiswa = () =>
-    navigate('/administrator/ppdb/tambah_perserta');
+  const NavigateToAddSiswa = () => navigate(ROUTE.Administrator.Ppdb.add);
 
   const handleExportExcel = () => {};
 

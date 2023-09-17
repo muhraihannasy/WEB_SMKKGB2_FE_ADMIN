@@ -1,6 +1,6 @@
 import toast from 'react-hot-toast';
 
-function toastSuccess() {
+function toastSuccess(message: string) {
   toast.custom((t) => (
     <div
       className={` 
@@ -23,8 +23,8 @@ function toastSuccess() {
         </svg>
       </div>
       <div className="w-full">
-        <h5 className="mb-1 text-md font-semibold text-black ">Sukses Login</h5>
-        <p className="text-sm leading-relaxed text-body">Anda Berhasil Login</p>
+        <h5 className="mb-1 text-md font-semibold text-black ">Berhasil</h5>
+        <p className="text-sm leading-relaxed text-body">{message}</p>
       </div>
     </div>
   ));

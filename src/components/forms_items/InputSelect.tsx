@@ -14,10 +14,20 @@ const InputSelect: React.FC<InputSelectProps> = ({
   options,
   name,
 }) => {
-  const { register } = useFormContext();
+  const {
+    register,
+    formState: { errors },
+  } = useFormContext();
 
-  const className =
-    'relative z-20 w-full rounded-lg appearance-none rounded border border-stroke bg-transparent h-[2.8125em]  px-4 outline-none transition focus:border-primary active:border-primary dark:border-form-strokedark dark:bg-form-input';
+  const error = errors && errors[name] ? true : false;
+
+  const className = `relative z-20 w-full rounded-lg appearance-none rounded border bg-transparent h-[2.8125em]  px-4 outline-none transition
+     ${
+       error
+         ? 'border-danger'
+         : ' border-stroke focus:border-primary active:border-primary'
+     }
+    `;
 
   return (
     <div>
@@ -57,6 +67,13 @@ const InputSelect: React.FC<InputSelectProps> = ({
           </svg>
         </span>
       </div>
+      <span
+        className={`block text-danger transition-all
+        ${error ? 'visible opacity-100 mt-2' : 'invisible opacity-0'}
+        `}
+      >
+        {error && errors[name]?.message}
+      </span>
     </div>
   );
 };

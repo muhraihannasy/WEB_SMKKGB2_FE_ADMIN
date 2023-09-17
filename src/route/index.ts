@@ -5,7 +5,7 @@ const ROUTE: any = {
     veritification: '/veritification',
   },
   Administrator: {
-    dashboard: '/administrator/dashboard',
+    Dashboard: '/administrator/dashboard',
     User_Management: {
       root: '/administrator/user_management',
       list: '/administrator/user_management/list',
