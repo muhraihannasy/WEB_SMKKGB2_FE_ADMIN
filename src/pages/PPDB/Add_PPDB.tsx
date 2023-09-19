@@ -31,7 +31,10 @@ import Form5 from '../../components/PPDB/Form/Form5';
 import Form6 from '../../components/PPDB/Form/Form6';
 import Form7 from '../../components/PPDB/Form/Form7';
 import Form8 from '../../components/PPDB/Form/Form8';
-import { toastError } from '../../components/Toast';
+import { toastError, toastSuccess } from '../../components/Toast';
+import { postData } from '../../utils/ApiUtils';
+import { useNavigate } from 'react-router-dom';
+import ROUTE from '../../route';
 
 const tabs = [
   {
@@ -48,19 +51,19 @@ const tabs = [
   },
   {
     id: 4,
-    name: 'Beasiswa',
-  },
-  {
-    id: 5,
-    name: 'Prestasi',
-  },
-  {
-    id: 6,
     name: 'Registrasi',
   },
   {
-    id: 7,
+    id: 5,
     name: 'Berkas',
+  },
+  {
+    id: 6,
+    name: 'Beasiswa',
+  },
+  {
+    id: 7,
+    name: 'Prestasi',
   },
   {
     id: 8,
@@ -166,6 +169,7 @@ type FormData = yup.InferType<typeof schema>;
 const Add_PPDB = () => {
   const [currentTab, setCurrentTab] = useState(1);
 
+  const navigate = useNavigate();
   const form = useForm<FormData>({
     defaultValues: {
       ...PPDB_ADMIN_ADD_FAKER(),
@@ -198,7 +202,7 @@ const Add_PPDB = () => {
     formState: { errors },
   } = form;
 
-  function handleOnSubmit(formValue: any) {
+  async function handleOnSubmit(formValue: any) {
     const { address, kecamatan, kelurahan, rt, rw, kodepos } = formValue;
 
     // Combine Address
@@ -215,13 +219,27 @@ const Add_PPDB = () => {
     ];
 
     // Filtering To Remove Properties Unused Properties
-    const newFormValue = Object.fromEntries(
+    let newFormValue = Object.fromEntries(
       Object.entries(formValue).filter(
         ([key]) => !propertiesToRemove.includes(key),
       ),
     );
 
-    console.log(newFormValue);
+    newFormValue.scholarships = null;
+    newFormValue.achievements = null;
+
+    try {
+      const request = await postData('/admin/registration', newFormValue);
+      if (request.success) {
+        toastSuccess('Berhasil Menyimpan Data');
+        navigate(ROUTE.Administrator.Ppdb.list);
+      }
+    } catch (error: any) {
+      if (error.response.data.errors.email) {
+        toastError('Email sudah digunakan, coba alamat email lain');
+      }
+      console.log(error);
+    }
   }
 
   const notify = () =>
@@ -265,10 +283,10 @@ const Add_PPDB = () => {
               {currentTab == 1 && <Form1Admin />}
               {currentTab == 2 && <Form2 />}
               {currentTab == 3 && <Form3 />}
-              {currentTab == 4 && <Form4 />}
-              {currentTab == 5 && <Form5 />}
-              {currentTab == 6 && <Form6 />}
-              {currentTab == 7 && <Form7 />}
+              {currentTab == 4 && <Form6 />}
+              {currentTab == 5 && <Form7 />}
+              {currentTab == 6 && <Form4 />}
+              {currentTab == 7 && <Form5 />}
               {currentTab == 8 && <Form8 />}
 
               <div className="w-full grid grid-cols-3 gap-[1.2em] mt-[5em] ">

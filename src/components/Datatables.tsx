@@ -1,4 +1,4 @@
-import { useTable, usePagination } from "react-table";
+import { useTable, usePagination } from 'react-table';
 
 const Datatables = ({ columns, data }) => {
   const {
@@ -6,10 +6,7 @@ const Datatables = ({ columns, data }) => {
     getTableBodyProps,
     headerGroups,
     prepareRow,
-    page, // Instead of using 'rows', we'll use page,
-    // which has only the rows for the active page
-
-    // The rest of these things are super handy, too ;)
+    page,
     canPreviousPage,
     canNextPage,
     pageOptions,
@@ -24,7 +21,7 @@ const Datatables = ({ columns, data }) => {
       columns,
       data,
     },
-    usePagination
+    usePagination,
   );
 
   const { pageIndex } = state;
@@ -44,7 +41,7 @@ const Datatables = ({ columns, data }) => {
                       className="min-w-[120px] py-4 pl-4 font-medium text-black dark:text-white "
                       {...column.getHeaderProps()}
                     >
-                      {column.render("Header")}
+                      {column.render('Header')}
                     </th>
                   ))}
                 </tr>
@@ -62,7 +59,7 @@ const Datatables = ({ columns, data }) => {
                           className="border-b border-[#eee] py-5 pl-4 dark:border-strokedark "
                           {...cell.getCellProps()}
                         >
-                          {cell.render("Cell")}
+                          {cell.render('Cell')}
                         </td>
                       );
                     })}
@@ -72,10 +69,10 @@ const Datatables = ({ columns, data }) => {
             </tbody>
           </table>
           <span>
-            Page{" "}
+            Page{' '}
             <strong>
               {pageIndex + 1} of {pageCount}
-            </strong>{" "}
+            </strong>{' '}
           </span>
           <select name="" id="" onChange={(e) => setPageSize(e.target.value)}>
             <option value="10">10</option>
@@ -96,7 +93,7 @@ const Datatables = ({ columns, data }) => {
             className="bg-meta-6 text-white px-6 py-2 rounded-md font-semibold text-lg "
           >
             Next
-          </button>{" "}
+          </button>{' '}
         </div>
       </div>
     </>

@@ -29,6 +29,7 @@ import Add_PPDB_Student from './pages/PPDB/Add_PPDB_Student';
 import Add_PPDB from './pages/PPDB/Add_PPDB';
 
 import 'react-toastify/dist/ReactToastify.css';
+import 'rsuite/dist/rsuite-no-reset.min.css';
 import ROUTE from './route';
 import { Toaster } from 'react-hot-toast';
 import UserProvider from './context/UserContext';
