@@ -25,7 +25,7 @@ const Input: React.FC<InputProps> = ({
   const error = errors && errors[name] ? true : false;
 
   const className = {
-    label: 'mb-2.5 block font-medium text-black dark:text-white',
+    label: 'mb-2.5 block  text-black dark:text-white',
     input: `w-full rounded-lg border-[1.5px] bg-transparent px-5 h-[2.8125em] outline-none transition  disabled:cursor-default disabled:bg-whiter
       ${
         error

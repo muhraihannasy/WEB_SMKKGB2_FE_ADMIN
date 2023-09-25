@@ -37,7 +37,7 @@ const DefaultPopover = React.forwardRef(({ content, ...props }, ref) => {
   return (
     <Popover ref={ref} {...props}>
       <div className="flex items-center justify-center gap-[1em] px-2">
-        <button className="hover:text-primary flex items-center">
+        <button className="hover:text-primary flex items-center" type="button">
           <svg
             className="fill-current"
             width="18"
@@ -56,7 +56,7 @@ const DefaultPopover = React.forwardRef(({ content, ...props }, ref) => {
             />
           </svg>
         </button>
-        <button className="hover:text-primary">
+        <button className="hover:text-primary" type="button">
           <svg
             className="fill-current"
             width="18"
@@ -83,7 +83,7 @@ const DefaultPopover = React.forwardRef(({ content, ...props }, ref) => {
             />
           </svg>
         </button>
-        <button className="hover:text-primary">
+        <button className="hover:text-primary" type="button">
           <svg
             className="fill-current"
             width="18"

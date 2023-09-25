@@ -34,7 +34,7 @@ const SignIn = () => {
   const { setCurrentUser, user } = useUserContext();
   const navigate = useNavigate();
 
-  const form = useForm<FormValue>({
+  const form = useForm({
     resolver: yupResolver(formSchema),
   });
   const {
@@ -48,6 +48,17 @@ const SignIn = () => {
     try {
       const request = await postData('/auth/login', formValue);
 
+      if (request.data.status_payment == '1') {
+        localStorage.setItem(
+          'registration_code',
+          request.data.code_registration,
+        );
+        navigate(
+          `${ROUTE.Auth.veritification}/${request.data.registration_uuid}`,
+        );
+        return;
+      }
+
       const token = request.access_token;
       localStorage.setItem('acc_tkn_exp_kgb', token);
 
@@ -56,10 +67,9 @@ const SignIn = () => {
       localStorage.setItem('exp_aop', expired.toISOString());
 
       setCurrentUser(request.user);
-
       toastSuccess('Login Berhasil');
 
-      navigate(ROUTE.Administrator.Dashboard);
+      // navigate(ROUTE.Administrator.Dashboard);
     } catch (error: any) {
       if (error.response.data.error == 'Unauthorized') {
         toastError('Email atau Password Salah');

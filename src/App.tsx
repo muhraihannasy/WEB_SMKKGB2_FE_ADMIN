@@ -87,7 +87,10 @@ function App() {
         <Route path="/ui/buttons" element={<Buttons />} />
         <Route path={ROUTE.Auth.login} element={<SignIn />} />
         <Route path={ROUTE.Auth.register} element={<SignUp />} />
-        <Route path={ROUTE.Auth.veritification} element={<Verification />} />
+        <Route
+          path={ROUTE.Auth.veritification + '/:id'}
+          element={<Verification />}
+        />
       </Routes>
     </UserProvider>
   );

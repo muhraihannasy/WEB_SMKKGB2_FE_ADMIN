@@ -63,6 +63,7 @@ const PPDB = () => {
           columns={column}
           columnIsNotSorted={['selection']}
           useCustomTable={useSelection}
+          onClickRow={() => {}}
           onChangeSelection={(value) => console.log(value)}
         />
       )}

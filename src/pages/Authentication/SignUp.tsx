@@ -1,7 +1,9 @@
 // Third Party
 import { useForm, FormProvider } from 'react-hook-form';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { DevTool } from '@hookform/devtools';
+import { yupResolver } from '@hookform/resolvers/yup';
+import * as Yup from 'yup';
 
 // Components
 import Input from '../../components/forms_items/Input';
@@ -10,24 +12,57 @@ import Button from '../../components/Button';
 import InputSelect from '../../components/forms_items/InputSelect';
 
 // Images
-import background from '../../images/background_abstract.jpg';
 import ROUTE from '../../route';
+import { competency } from '../../utils/Data';
+import { postData } from '../../utils/ApiUtils';
+import { toastError, toastSuccess } from '../../components/Toast';
 
 interface FormValue {
+  fullname: string;
+  from_school: string;
+  phone: string;
   email: string;
+  competency_pick_1: string;
+  competency_pick_2: string;
+  competency_pick_3: string;
   password: string;
 }
 
+const formSchema = Yup.object().shape({
+  fullname: Yup.string().required('Field Tidak Boleh Kosong'),
+  from_school: Yup.string().required('Field Tidak Boleh Kosong'),
+  phone: Yup.string().required('Field Tidak Boleh Kosong'),
+  email: Yup.string().email('Email tidak valid').required('Email wajib diisi'),
+  competency_pick_1: Yup.string().required('Field Tidak Boleh Kosong'),
+  competency_pick_2: Yup.string().required('Field Tidak Boleh Kosong'),
+  competency_pick_3: Yup.string().required('Field Tidak Boleh Kosong'),
+  password: Yup.string()
+    .min(6, 'Password harus memiliki minimal 6 karakter')
+    .required('Password wajib diisi'),
+});
+
 const SignIn = () => {
-  const form = useForm<FormValue>();
+  const navigate = useNavigate();
+  const form = useForm({
+    resolver: yupResolver(formSchema),
+  });
   const {
     handleSubmit,
     control,
     formState: { errors },
   } = form;
 
-  function handleOnSubmit(formValue: FormValue) {
-    console.log(formValue);
+  async function handleOnSubmit(formValue: FormValue) {
+    try {
+      const request = await postData('/auth/register', formValue);
+      toastSuccess('Behasil Mendaftar');
+
+      navigate(ROUTE.Auth.login);
+    } catch (error: any) {
+      if (error.response.data.error == 'Unauthorized') {
+        toastError('Email atau Password Salah');
+      }
+    }
   }
 
   return (
@@ -55,22 +90,22 @@ const SignIn = () => {
                   errors={errors}
                 />
                 <InputSelect
-                  name="competency_1"
+                  name="competency_pick_1"
                   label="Pillihan Kompetensi 1"
                   placeholder="......"
-                  options={[1, 2]}
+                  options={competency}
                 />
                 <InputSelect
-                  name="competency_2"
+                  name="competency_pick_2"
                   label="Pillihan Kompetensi 2"
                   placeholder="......"
-                  options={[1, 2]}
+                  options={competency}
                 />
                 <InputSelect
-                  name="competency_3"
+                  name="competency_pick_3"
                   label="Pillihan Kompetensi 3"
                   placeholder="......"
-                  options={[1, 2]}
+                  options={competency}
                 />
                 <Input
                   name="phone"
