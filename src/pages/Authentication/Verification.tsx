@@ -65,7 +65,7 @@ const Verification = () => {
             </p>
           </div>
           <div className="">
-            {fileName == null && (
+            {fileName !== null && (
               <div className=" w-[1.8em] h-[1.8em] rounded-full bg-white border text-meta-3 flex items-center justify-center text-xl">
                 <BsCheckLg />
               </div>

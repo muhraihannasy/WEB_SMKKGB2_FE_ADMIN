@@ -17,6 +17,7 @@ import { useEffect } from 'react';
 import ROUTE from '../../route';
 import { postData } from '../../utils/ApiUtils';
 import { useUserContext } from '../../context/UserContext';
+import toastWarning from '../../components/Toast/ToastWarning';
 
 interface FormValue {
   email: string;
@@ -53,8 +54,9 @@ const SignIn = () => {
           'registration_code',
           request.data.code_registration,
         );
+        toastWarning('Segera Lakukan Pembayaran..');
         navigate(
-          `${ROUTE.Auth.veritification}/${request.data.registration_uuid}`,
+          `${ROUTE.Auth.veritification}/${request.data.registration_uuid}?payment=ofline`,
         );
         return;
       }
