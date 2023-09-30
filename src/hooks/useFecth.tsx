@@ -26,7 +26,6 @@ const useFecth = (url: string) => {
         setData(response.data);
       } catch (error: any) {
         setError(error);
-        console.error(error);
       } finally {
         setIsLoading(false);
       }

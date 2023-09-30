@@ -49,7 +49,7 @@ const SignIn = () => {
     try {
       const request = await postData('/auth/login', formValue);
 
-      if (request.data.status_payment == '1') {
+      if (request?.data?.status_payment == '1') {
         localStorage.setItem(
           'registration_code',
           request.data.code_registration,
@@ -58,6 +58,12 @@ const SignIn = () => {
         navigate(
           `${ROUTE.Auth.veritification}/${request.data.registration_uuid}?payment=ofline`,
         );
+        return;
+      }
+
+      if (request?.data?.status_payment == '2') {
+        toastWarning('Pembayaran Anda Sedang Di Proses...');
+        navigate(`${ROUTE.Auth.payment_success}/${request.data.payment_uuid}`);
         return;
       }
 
@@ -71,7 +77,7 @@ const SignIn = () => {
       setCurrentUser(request.user);
       toastSuccess('Login Berhasil');
 
-      // navigate(ROUTE.Administrator.Dashboard);
+      navigate(ROUTE.Administrator.Dashboard);
     } catch (error: any) {
       if (error.response.data.error == 'Unauthorized') {
         toastError('Email atau Password Salah');

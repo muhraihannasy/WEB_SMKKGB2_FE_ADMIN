@@ -56,7 +56,6 @@ const SignIn = () => {
     try {
       const request = await postData('/auth/register', formValue);
       toastSuccess('Behasil Mendaftar');
-
       navigate(ROUTE.Auth.login);
     } catch (error: any) {
       if (error.response.data.error == 'Unauthorized') {

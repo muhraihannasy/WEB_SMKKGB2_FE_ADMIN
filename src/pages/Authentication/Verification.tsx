@@ -1,6 +1,9 @@
-import { useState } from 'react';
+import { ChangeEvent, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { BsFillCloudUploadFill, BsCheckLg } from 'react-icons/bs';
+import { toastError } from '../../components/Toast';
+
+const typeAllowFiles = ['image/jpg', 'image/jpeg', 'image/png'];
 
 const Verification = () => {
   let [searchParams, setSearchParams] = useSearchParams();
@@ -19,8 +22,18 @@ const Verification = () => {
     setSearchParams({ payment: mode_payment[mode] });
   }
 
-  async function handlePayment() {
-    if (!handlePayment) return;
+  function handleUploadProofTransfer(event: ChangeEvent<HTMLInputElement>) {
+    const file = event.target.files[0];
+    const typeFile = file.type;
+      m m    
+    if (!typeAllowFiles.includes(typeFile)) {
+      toastError('Tipe File Harus PNG, JPG, atau JPEG');
+      return;
+    }
+  }
+
+  async function handlePaymentOnline() {
+    if (!handlePaymentOnline) return;
   }
 
   const PaymentOfline = () => {
@@ -58,6 +71,7 @@ const Verification = () => {
             <input
               type="file"
               className="absolute left-0 w-full h-full bg-meta-2 opacity-0"
+              onChange={handleUploadProofTransfer}
             />
             <BsFillCloudUploadFill className="" />
             <p className="text-sm ml-2">
@@ -74,7 +88,7 @@ const Verification = () => {
         </div>
 
         <button
-          onClick={handlePayment}
+          onClick={handlePaymentOnline}
           className={`w-full mt-6 py-3 rounded-xl font-semibold ${
             alreadyUpload ? 'bg-meta-3' : 'bg-meta-2'
           }`}

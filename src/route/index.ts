@@ -3,6 +3,7 @@ const ROUTE: any = {
     login: '/',
     register: '/register',
     veritification: '/veritification',
+    payment_success: '/payment',
   },
   Administrator: {
     Dashboard: '/administrator/dashboard',
@@ -13,6 +14,7 @@ const ROUTE: any = {
     Ppdb: {
       root: '/administrator/ppdb',
       list: '/administrator/ppdb/list',
+      list_pay: '/administrator/ppdb/list_pembayaran',
       add: '/administrator/ppdb/add',
       edit: '/administrator/ppdb/edit',
       detail: '/administrator/ppdb/detail',

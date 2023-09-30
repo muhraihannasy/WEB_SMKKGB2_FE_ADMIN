@@ -41,6 +41,8 @@ const PPDB = () => {
     [RegistrationsList?.data],
   );
 
+  console.log(error, 'erorr');
+
   return (
     <DefaultLayout>
       <Breadcrumb pageName="Peneriman Siswa Baru" />
