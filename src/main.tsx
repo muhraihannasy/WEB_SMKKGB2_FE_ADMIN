@@ -5,6 +5,7 @@ import App from './App';
 import 'rsuite/dist/rsuite-no-reset.min.css';
 import './index.css';
 import './satoshi.css';
+import 'react-photo-view/dist/react-photo-view.css';
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <React.StrictMode>

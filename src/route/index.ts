@@ -18,6 +18,7 @@ const ROUTE: any = {
       add: '/administrator/ppdb/add',
       edit: '/administrator/ppdb/edit',
       detail: '/administrator/ppdb/detail',
+      detail_payment: '/administrator/ppdb/detail',
     },
     Artikel: {
       root: '/administrator/artikel',

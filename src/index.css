@@ -239,3 +239,13 @@ span.flatpickr-weekday,
     transform: translateX(-5px) rotate(-5deg);
   }
 }
+
+.backdrop {
+  backdrop-filter: blur(2px); /* Sesuaikan tingkat blur yang Anda inginkan */
+  background-color: rgba(
+    255,
+    255,
+    255,
+    0.5
+  ); /* Warna latar belakang dengan alpha (transparansi) */
+}

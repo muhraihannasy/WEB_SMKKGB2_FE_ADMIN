@@ -12,12 +12,13 @@ import Button from '../../components/Button';
 import { toastError, toastSuccess } from '../../components/Toast/index';
 
 // Images
-import LoginBackground from '/images/login.jpg';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import ROUTE from '../../route';
 import { postData } from '../../utils/ApiUtils';
 import { useUserContext } from '../../context/UserContext';
 import toastWarning from '../../components/Toast/ToastWarning';
+import { setToken } from '../../helpers';
+import SpinnerLoading from '../../components/SpinnerLoading';
 
 interface FormValue {
   email: string;
@@ -33,6 +34,9 @@ const formSchema = Yup.object().shape({
 
 const SignIn = () => {
   const { setCurrentUser, user } = useUserContext();
+
+  const [loading, setLoading] = useState(false);
+
   const navigate = useNavigate();
 
   const form = useForm({
@@ -46,14 +50,18 @@ const SignIn = () => {
   } = form;
 
   async function handleOnSubmit(formValue: FormValue) {
+    setLoading(true);
+
     try {
       const request = await postData('/auth/login', formValue);
+      setLoading(false);
 
       if (request?.data?.status_payment == '1') {
         localStorage.setItem(
           'registration_code',
           request.data.code_registration,
         );
+        setToken(request.data.access_token);
         toastWarning('Segera Lakukan Pembayaran..');
         navigate(
           `${ROUTE.Auth.veritification}/${request.data.registration_uuid}?payment=ofline`,
@@ -67,27 +75,18 @@ const SignIn = () => {
         return;
       }
 
-      const token = request.access_token;
-      localStorage.setItem('acc_tkn_exp_kgb', token);
-
-      const expired = new Date();
-      expired.setTime(expired.getHours() + 1);
-      localStorage.setItem('exp_aop', expired.toISOString());
-
+      setToken(request.access_token);
       setCurrentUser(request.user);
       toastSuccess('Login Berhasil');
 
       navigate(ROUTE.Administrator.Dashboard);
     } catch (error: any) {
+      setLoading(false);
       if (error.response.data.error == 'Unauthorized') {
         toastError('Email atau Password Salah');
       }
     }
   }
-
-  console.log('USER', user);
-
-  // useEffect(() => {}, [errors]);
 
   useEffect(() => {
     document.querySelector('body')?.classList.add('bg-white');
@@ -131,7 +130,7 @@ const SignIn = () => {
               </Link>
 
               <Button type="submit" bg="primary" size="full">
-                Sign In
+                {loading ? <SpinnerLoading /> : 'Sign In'}
               </Button>
 
               <p className="text-center mt-6 pb-10">

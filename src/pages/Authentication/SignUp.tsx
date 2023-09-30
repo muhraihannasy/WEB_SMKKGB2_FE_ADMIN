@@ -16,6 +16,8 @@ import ROUTE from '../../route';
 import { competency } from '../../utils/Data';
 import { postData } from '../../utils/ApiUtils';
 import { toastError, toastSuccess } from '../../components/Toast';
+import SpinnerLoading from '../../components/SpinnerLoading';
+import { useState } from 'react';
 
 interface FormValue {
   fullname: string;
@@ -41,8 +43,11 @@ const formSchema = Yup.object().shape({
     .required('Password wajib diisi'),
 });
 
-const SignIn = () => {
+const SignUp = () => {
+  const [loading, setLoading] = useState(false);
+
   const navigate = useNavigate();
+
   const form = useForm({
     resolver: yupResolver(formSchema),
   });
@@ -53,13 +58,17 @@ const SignIn = () => {
   } = form;
 
   async function handleOnSubmit(formValue: FormValue) {
+    setLoading(true);
     try {
       const request = await postData('/auth/register', formValue);
+      setLoading(false);
+
       toastSuccess('Behasil Mendaftar');
       navigate(ROUTE.Auth.login);
     } catch (error: any) {
-      if (error.response.data.error == 'Unauthorized') {
-        toastError('Email atau Password Salah');
+      setLoading(false);
+      if (error.response.data.errors.email) {
+        toastError('Email Sudah Digunakan');
       }
     }
   }
@@ -135,9 +144,8 @@ const SignIn = () => {
               </Link>
 
               <Button type="submit" bg="primary" size="full">
-                Daftar Sekarang
+                {loading ? <SpinnerLoading /> : ' Daftar Sekarang'}
               </Button>
-
               <p className="text-center mt-6 pb-16">
                 Sudah Memiliki Akun ?{' '}
                 <Link
@@ -159,4 +167,4 @@ const SignIn = () => {
 
 // <DevTool control={control} /> {/* set up the dev tool */}
 
-export default SignIn;
+export default SignUp;

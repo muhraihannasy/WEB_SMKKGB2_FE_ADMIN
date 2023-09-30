@@ -1,14 +1,28 @@
 import { ChangeEvent, useState } from 'react';
-import { useSearchParams } from 'react-router-dom';
+import { useNavigate, useParams, useSearchParams } from 'react-router-dom';
 import { BsFillCloudUploadFill, BsCheckLg } from 'react-icons/bs';
-import { toastError } from '../../components/Toast';
+import { toastError, toastSuccess } from '../../components/Toast';
+import environment from '../../environment';
+import { getToken } from '../../helpers';
+import axios from 'axios';
+import { useUserContext } from '../../context/UserContext';
+import { postData } from '../../utils/ApiUtils';
+import ROUTE from '../../route';
+import SpinnerLoading from '../../components/SpinnerLoading';
+import Spinner from '../../components/Spinner';
 
 const typeAllowFiles = ['image/jpg', 'image/jpeg', 'image/png'];
 
 const Verification = () => {
   let [searchParams, setSearchParams] = useSearchParams();
   const [alreadyUpload, setAlreadyUpload] = useState(false);
+  const [isUploading, setIsUploading] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [fileUploaded, setFileUploaded] = useState('');
   const [fileName, setFileName] = useState(null);
+
+  const navigate = useNavigate();
+  const { registration_id } = useParams();
 
   const code_registration = localStorage.getItem('registration_code');
   const payment_mode = searchParams.get('payment');
@@ -22,18 +36,81 @@ const Verification = () => {
     setSearchParams({ payment: mode_payment[mode] });
   }
 
-  function handleUploadProofTransfer(event: ChangeEvent<HTMLInputElement>) {
+  async function handleUploadProofTransfer(
+    event: ChangeEvent<HTMLInputElement>,
+  ) {
     const file = event.target.files[0];
     const typeFile = file.type;
-      m m    
+
     if (!typeAllowFiles.includes(typeFile)) {
       toastError('Tipe File Harus PNG, JPG, atau JPEG');
       return;
     }
+
+    setAlreadyUpload(false);
+    setIsUploading(true);
+
+    const image_old_temporary = fileUploaded;
+    let imageOld =
+      image_old_temporary !== undefined ? image_old_temporary?.split('/') : '';
+    imageOld = imageOld[imageOld.length - 1];
+
+    const formdata = new FormData();
+    formdata.append('image', file, file.name);
+    formdata.append('folder', 'payment_registration');
+    formdata.append('image_old', imageOld);
+
+    let config = {
+      method: 'POST',
+      url: `${environment.apiUrl}/berkas/upload`,
+      headers: {
+        'Content-Type': 'multipart/form-data',
+        Authorization: `Bearer ${getToken()}`,
+      },
+      data: formdata,
+    };
+
+    try {
+      const request = await axios(config);
+      setFileUploaded(request.data.url);
+      setAlreadyUpload(true);
+      setFileName(file.name);
+      setIsUploading(false);
+    } catch (error: any) {
+      console.log(error);
+      setIsUploading(false);
+    }
   }
 
   async function handlePaymentOnline() {
-    if (!handlePaymentOnline) return;
+    const formValue = {
+      registration_id,
+      file: fileUploaded,
+    };
+
+    setLoading(true);
+
+    try {
+      const request = await postData(
+        '/candidate/registration/update/proof_payment',
+        formValue,
+      );
+
+      console.log(request, 'REQUEST');
+
+      setLoading(false);
+
+      if (request.success) {
+        toastSuccess('Berhasil Mengupload Bukti Pembayaran');
+
+        navigate(
+          `${ROUTE.Auth.payment_success}/${request.data.payment_registration_id}`,
+        );
+      }
+    } catch (error: any) {
+      setLoading(false);
+      console.log(error);
+    }
   }
 
   const PaymentOfline = () => {
@@ -78,8 +155,9 @@ const Verification = () => {
               {fileName == null ? 'Upload Bukti Tranfer...' : fileName}
             </p>
           </div>
-          <div className="">
-            {fileName !== null && (
+          <div>
+            {isUploading && <Spinner />}
+            {alreadyUpload == true && (
               <div className=" w-[1.8em] h-[1.8em] rounded-full bg-white border text-meta-3 flex items-center justify-center text-xl">
                 <BsCheckLg />
               </div>
@@ -89,11 +167,11 @@ const Verification = () => {
 
         <button
           onClick={handlePaymentOnline}
-          className={`w-full mt-6 py-3 rounded-xl font-semibold ${
-            alreadyUpload ? 'bg-meta-3' : 'bg-meta-2'
+          className={`w-full mt-6 py-3 flex items-center justify-center rounded-xl font-semibold ${
+            alreadyUpload ? 'bg-meta-3 text-white' : 'bg-meta-2'
           }`}
         >
-          Kirim
+          {loading ? <SpinnerLoading /> : 'Kirim'}
         </button>
       </div>
     );
